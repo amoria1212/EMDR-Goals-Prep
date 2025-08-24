@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EMDR: Goals and Beliefs</title>
+    <title>EMDR: Your Healing Journey</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -29,12 +29,23 @@
             bottom: 0;
             width: 50px;
             height: 3px;
-            background-color: #d8a2a0; /* Dusty rose accent */
+            background-color: #D1D5DB; /* Light Gray-Silver accent */
             border-radius: 9999px;
+        }
+        .custom-list-item {
+            display: flex;
+            align-items: flex-start;
+        }
+        .custom-list-item::before {
+            content: '✓';
+            color: #bca05b; /* Muted gold accent */
+            font-weight: bold;
+            margin-right: 0.75rem;
+            line-height: 1.5;
         }
         .journal-box {
             background-color: #f0e8e6; /* Dusty rose background for journaling sections */
-            border-left: 4px solid #d8a2a0; /* Dusty rose border */
+            border-left: 4px solid #D1D5DB; /* Light Gray-Silver border */
             padding: 1.5rem;
             border-radius: 0.75rem;
             margin-bottom: 1.5rem;
@@ -42,11 +53,14 @@
         .journal-input {
             width: 100%;
             min-height: 3rem;
-            border: 1px solid #d1d5db;
+            border: 1px solid #d1d5db; /* Light gray border */
             background-color: #fff;
             padding: 0.5rem;
             border-radius: 0.375rem;
             resize: vertical;
+        }
+        .silver-accent {
+            color: #a0a7b0; /* Soft silver color */
         }
     </style>
 </head>
@@ -55,121 +69,378 @@
     <!-- Main Container -->
     <div class="max-w-4xl mx-auto bg-white p-6 sm:p-10 rounded-3xl shadow-2xl border border-gray-100">
 
-        <!-- Introductory Header -->
-        <h1 class="text-3xl sm:text-4xl font-bold text-center text-gray-800 mb-6 sm:mb-8">Your Healing Goals</h1>
-        <p class="text-gray-600 mb-6 leading-relaxed text-lg">
-            This guide is designed to help you clarify what you'd like to change and begin to identify old beliefs that may be holding you back. Think of this as a way to get curious about your inner world and create a roadmap for our work together. There are no right or wrong answers, and we can always explore this in our sessions if it feels overwhelming.
+        <!-- Introductory Header with Logo on Top -->
+        <header class="flex flex-col items-center mb-6 text-center">
+            <div class="mb-4">
+                <img src="https://i.imgur.com/JwAdvDd.png" alt="Janice LaFountaine, MS, LMFT Logo" class="h-24 w-auto rounded-full">
+            </div>
+            <div class="flex-grow">
+                <h1 class="text-3xl sm:text-4xl font-bold text-gray-800 mb-2">EMDR: Your Healing Journey</h1>
+                <p class="text-gray-600 mb-6 leading-relaxed text-lg">
+                    If you're reading this, you've probably heard about Eye Movement Desensitization and Reprocessing (EMDR) and are wondering what it's really about and how it might help you. EMDR is a gentle but powerful approach to healing that helps your mind process difficult experiences in a new way. While many people think EMDR is just about eye movements, it's actually much more than that. It's a way of helping your brain's natural healing process work more effectively. Think of it like clearing a path so that healing can flow more freely.
+                </p>
+            </div>
+        </header>
+
+        <!-- Why EMDR Can Help -->
+        <h2 class="text-2xl sm:text-3xl font-semibold text-gray-700 mt-8 mb-4 section-header">Why EMDR Can Help</h2>
+        <p class="text-gray-600 mb-6 leading-relaxed">
+            When something difficult or traumatic happens, sometimes our minds hold onto those experiences in ways that can cause ongoing pain. You might find yourself reliving moments, feeling overwhelmed by certain triggers, or sensing that the past is still very present in your body and emotions. This isn't your fault - it's how our minds sometimes protect us. But EMDR can help your brain process these experiences so they feel more like memories from the past rather than present-day threats.
         </p>
 
-        <!-- What I'd Like to Change Section -->
-        <h2 class="text-2xl sm:text-3xl font-semibold text-gray-700 mt-8 mb-4 section-header">What I'd Like to Change</h2>
+        <!-- The Eight Steps of EMDR -->
+        <h2 class="text-2xl sm:text-3xl font-semibold text-gray-700 mt-12 mb-4 section-header">The Eight Steps of EMDR</h2>
+        <p class="text-gray-600 mb-4 leading-relaxed">
+            EMDR follows eight gentle steps designed to make sure you feel safe and supported throughout your healing journey:
+        </p>
+        <ul class="list-none text-gray-700 space-y-4">
+            <li class="custom-list-item">
+                <div class="flex-1">
+                    <strong class="font-medium text-gray-800">Step 1: Getting to Know You</strong><br>
+                    We'll spend time talking about your history, your strengths, and what you hope for from this process. This helps me understand you as a whole person, not just your struggles. Please share anything that feels important - you know yourself best.
+                </div>
+            </li>
+            <li class="custom-list-item">
+                <div class="flex-1">
+                    <strong class="font-medium text-gray-800">Step 2: Building Your Toolkit</strong><br>
+                    Before we begin processing, we'll make sure you have plenty of resources and coping strategies. Think of this like preparing for a journey - we want to pack everything you might need to feel safe and grounded. This might take one session or several, and that's perfectly okay. Everyone's timeline is different.
+                </div>
+            </li>
+            <li class="custom-list-item">
+                <div class="flex-1">
+                    <strong class="font-medium text-gray-800">Step 3: Focusing on What We'll Work On</strong><br>
+                    Together, we'll identify the specific memory or issue you'd like to focus on. We'll explore what image comes to mind, how it makes you think about yourself, and how you'd rather think about yourself. We'll also notice what emotions and body sensations come up.
+                </div>
+            </li>
+            <li class="custom-list-item">
+                <div class="flex-1">
+                    <strong class="font-medium text-gray-800">Step 4: Processing the Difficult Stuff</strong><br>
+                    This is where the bilateral stimulation (like eye movements, tapping, or sounds) comes in. We'll work through the target memory and anything related to it. Don't worry - you'll be in control the whole time, and we'll check in frequently about how you're feeling.
+                </div>
+            </li>
+            <li class="custom-list-item">
+                <div class="flex-1">
+                    <strong class="font-medium text-gray-800">Step 5: Strengthening the Positive</strong><br>
+                    Once the distressing part has calmed down, we'll strengthen the positive beliefs you want to have about yourself. This helps the healing stick.
+                </div>
+            </li>
+            <li class="custom-list-item">
+                <div class="flex-1">
+                    <strong class="font-medium text-gray-800">Step 6: Body Check</strong><br>
+                    We'll scan your body to make sure there's no lingering tension or discomfort related to what we've processed. Your body holds wisdom, and we want to make sure it feels peaceful too.
+                </div>
+            </li>
+            <li class="custom-list-item">
+                <div class="flex-1">
+                    <strong class="font-medium text-gray-800">Step 7: Gentle Closure</strong><br>
+                    Before you leave, we'll make sure you feel grounded and stable. If anything feels unsettled, we'll work together to help you feel more centered before you go.
+                </div>
+            </li>
+            <li class="custom-list-item">
+                <div class="flex-1">
+                    <strong class="font-medium text-gray-800">Step 8: Checking In Next Time</strong><br>
+                    At the beginning of our next session, we'll talk about how things went between sessions. Sometimes processing continues after we finish, and that's completely normal.
+                </div>
+            </li>
+        </ul>
+
+        <!-- What to Expect Between Sessions -->
+        <h2 class="text-2xl sm:text-3xl font-semibold text-gray-700 mt-12 mb-4 section-header">What to Expect Between Sessions</h2>
+        <p class="text-gray-600 mb-4 leading-relaxed">
+            Once we begin EMDR, your mind may continue processing in gentle ways. You might notice:
+        </p>
+        <ul class="list-disc list-inside text-gray-700 space-y-2">
+            <li>Changes in how you react to old triggers</li>
+            <li>New insights or perspectives</li>
+            <li>Different emotional responses</li>
+            <li>Shifts in your relationships or daily life</li>
+            <li>Dreams or changes in sleep</li>
+            <li>Sometimes, temporary increases in emotions (this usually means healing is happening)</li>
+        </ul>
+        <p class="text-gray-600 italic mt-4">
+            All of this is normal. You're not alone in this process - please reach out if anything feels overwhelming.
+        </p>
+
+        <!-- Building Your 5 Most Important Memories -->
+        <h2 class="text-2xl sm:text-3xl font-semibold text-gray-700 mt-12 mb-4 section-header">Building Your 5 Most Important Memories</h2>
+        <p class="text-gray-600 mb-4 leading-relaxed">
+            I like to begin with knowing what your life experiences have been. I will ask you for the 5 most positive and 5 most difficult memories in your life, your resources, and what things upset you currently. The idea is to find out about you so that I can best help you begin your recovery or healing.
+        </p>
+        <p class="text-gray-600 mb-4 italic">
+            Please fill out the following pieces with this information so you begin to remember in your life until the most current. If you find this exercise too troubling, I will be glad to complete it with you in the session.
+        </p>
+
+        <!-- Positive Memories Section -->
+        <h3 class="text-xl sm:text-2xl font-semibold text-gray-800 mb-4 mt-8">Your 5 Most Positive Memories</h3>
         <div class="space-y-6">
             <div class="journal-box">
-                <h4 class="text-lg font-bold text-gray-700 mb-2">Behavior</h4>
-                <p class="mb-1 text-sm font-semibold">What are you doing that you don't want to do?</p>
+                <h4 class="text-lg font-bold text-gray-700 mb-2">Memory 1:</h4>
+                <p class="mb-1 text-sm font-semibold">What happened:</p>
                 <textarea class="journal-input mb-3" rows="2"></textarea>
-                <p class="mb-1 text-sm font-semibold">What are you not doing (or not doing enough) that you do want to do?</p>
+                <p class="mb-1 text-sm font-semibold">How old were you:</p>
+                <textarea class="journal-input mb-3" rows="1"></textarea>
+                <p class="mb-1 text-sm font-semibold">What made this positive:</p>
+                <textarea class="journal-input mb-3" rows="2"></textarea>
+                <p class="mb-1 text-sm font-semibold">How it makes you feel about yourself:</p>
                 <textarea class="journal-input" rows="2"></textarea>
             </div>
             <div class="journal-box">
-                <h4 class="text-lg font-bold text-gray-700 mb-2">Emotions</h4>
-                <p class="mb-1 text-sm font-semibold">What are you feeling that you don't want to feel?</p>
+                <h4 class="text-lg font-bold text-gray-700 mb-2">Memory 2:</h4>
+                <p class="mb-1 text-sm font-semibold">What happened:</p>
                 <textarea class="journal-input mb-3" rows="2"></textarea>
-                <p class="mb-1 text-sm font-semibold">What are you not feeling (or not feeling as much as you'd like) that you do want to feel?</p>
+                <p class="mb-1 text-sm font-semibold">How old were you:</p>
+                <textarea class="journal-input mb-3" rows="1"></textarea>
+                <p class="mb-1 text-sm font-semibold">What made this positive:</p>
+                <textarea class="journal-input mb-3" rows="2"></textarea>
+                <p class="mb-1 text-sm font-semibold">How it makes you feel about yourself:</p>
                 <textarea class="journal-input" rows="2"></textarea>
             </div>
             <div class="journal-box">
-                <h4 class="text-lg font-bold text-gray-700 mb-2">Sensations</h4>
-                <p class="mb-1 text-sm font-semibold">What are you feeling (physically) that you don't want to feel?</p>
+                <h4 class="text-lg font-bold text-gray-700 mb-2">Memory 3:</h4>
+                <p class="mb-1 text-sm font-semibold">What happened:</p>
                 <textarea class="journal-input mb-3" rows="2"></textarea>
-                <p class="mb-1 text-sm font-semibold">What are you not feeling (physically) that you do want to feel?</p>
+                <p class="mb-1 text-sm font-semibold">How old were you:</p>
+                <textarea class="journal-input mb-3" rows="1"></textarea>
+                <p class="mb-1 text-sm font-semibold">What made this positive:</p>
+                <textarea class="journal-input mb-3" rows="2"></textarea>
+                <p class="mb-1 text-sm font-semibold">How it makes you feel about yourself:</p>
                 <textarea class="journal-input" rows="2"></textarea>
             </div>
             <div class="journal-box">
-                <h4 class="text-lg font-bold text-gray-700 mb-2">Thoughts</h4>
-                <p class="mb-1 text-sm font-semibold">What are you thinking that you don't want to think (believe)?</p>
+                <h4 class="text-lg font-bold text-gray-700 mb-2">Memory 4:</h4>
+                <p class="mb-1 text-sm font-semibold">What happened:</p>
                 <textarea class="journal-input mb-3" rows="2"></textarea>
-                <p class="mb-1 text-sm font-semibold">What are you not thinking that you do want to think (believe)?</p>
+                <p class="mb-1 text-sm font-semibold">How old were you:</p>
+                <textarea class="journal-input mb-3" rows="1"></textarea>
+                <p class="mb-1 text-sm font-semibold">What made this positive:</p>
+                <textarea class="journal-input mb-3" rows="2"></textarea>
+                <p class="mb-1 text-sm font-semibold">How it makes you feel about yourself:</p>
+                <textarea class="journal-input" rows="2"></textarea>
+            </div>
+            <div class="journal-box">
+                <h4 class="text-lg font-bold text-gray-700 mb-2">Memory 5:</h4>
+                <p class="mb-1 text-sm font-semibold">What happened:</p>
+                <textarea class="journal-input mb-3" rows="2"></textarea>
+                <p class="mb-1 text-sm font-semibold">How old were you:</p>
+                <textarea class="journal-input mb-3" rows="1"></textarea>
+                <p class="mb-1 text-sm font-semibold">What made this positive:</p>
+                <textarea class="journal-input mb-3" rows="2"></textarea>
+                <p class="mb-1 text-sm font-semibold">How it makes you feel about yourself:</p>
                 <textarea class="journal-input" rows="2"></textarea>
             </div>
         </div>
 
-        <!-- Examples of Negative Beliefs Section -->
-        <h2 class="text-2xl sm:text-3xl font-semibold text-gray-700 mt-12 mb-4 section-header">Examples of Negative Beliefs</h2>
+        <!-- Difficult Memories Section -->
+        <h3 class="text-xl sm:text-2xl font-semibold text-gray-800 mb-4 mt-8">Your 5 Most Difficult Memories</h3>
+        <div class="space-y-6">
+            <div class="journal-box">
+                <h4 class="text-lg font-bold text-gray-700 mb-2">Memory 1:</h4>
+                <p class="mb-1 text-sm font-semibold">What happened:</p>
+                <textarea class="journal-input mb-3" rows="2"></textarea>
+                <p class="mb-1 text-sm font-semibold">How old were you:</p>
+                <textarea class="journal-input mb-3" rows="1"></textarea>
+                <p class="mb-1 text-sm font-semibold">Worst part/image:</p>
+                <textarea class="journal-input mb-3" rows="2"></textarea>
+                <p class="mb-1 text-sm font-semibold">How it makes you think about yourself:</p>
+                <textarea class="journal-input mb-3" rows="2"></textarea>
+                <p class="mb-1 text-sm font-semibold">Emotions it brings up:</p>
+                <textarea class="journal-input mb-3" rows="2"></textarea>
+                <p class="mb-1 text-sm font-semibold">Where you feel it in your body:</p>
+                <textarea class="journal-input" rows="2"></textarea>
+            </div>
+            <div class="journal-box">
+                <h4 class="text-lg font-bold text-gray-700 mb-2">Memory 2:</h4>
+                <p class="mb-1 text-sm font-semibold">What happened:</p>
+                <textarea class="journal-input mb-3" rows="2"></textarea>
+                <p class="mb-1 text-sm font-semibold">How old were you:</p>
+                <textarea class="journal-input mb-3" rows="1"></textarea>
+                <p class="mb-1 text-sm font-semibold">Worst part/image:</p>
+                <textarea class="journal-input mb-3" rows="2"></textarea>
+                <p class="mb-1 text-sm font-semibold">How it makes you think about yourself:</p>
+                <textarea class="journal-input mb-3" rows="2"></textarea>
+                <p class="mb-1 text-sm font-semibold">Emotions it brings up:</p>
+                <textarea class="journal-input mb-3" rows="2"></textarea>
+                <p class="mb-1 text-sm font-semibold">Where you feel it in your body:</p>
+                <textarea class="journal-input" rows="2"></textarea>
+            </div>
+            <div class="journal-box">
+                <h4 class="text-lg font-bold text-gray-700 mb-2">Memory 3:</h4>
+                <p class="mb-1 text-sm font-semibold">What happened:</p>
+                <textarea class="journal-input mb-3" rows="2"></textarea>
+                <p class="mb-1 text-sm font-semibold">How old were you:</p>
+                <textarea class="journal-input mb-3" rows="1"></textarea>
+                <p class="mb-1 text-sm font-semibold">Worst part/image:</p>
+                <textarea class="journal-input mb-3" rows="2"></textarea>
+                <p class="mb-1 text-sm font-semibold">How it makes you think about yourself:</p>
+                <textarea class="journal-input mb-3" rows="2"></textarea>
+                <p class="mb-1 text-sm font-semibold">Emotions it brings up:</p>
+                <textarea class="journal-input mb-3" rows="2"></textarea>
+                <p class="mb-1 text-sm font-semibold">Where you feel it in your body:</p>
+                <textarea class="journal-input" rows="2"></textarea>
+            </div>
+            <div class="journal-box">
+                <h4 class="text-lg font-bold text-gray-700 mb-2">Memory 4:</h4>
+                <p class="mb-1 text-sm font-semibold">What happened:</p>
+                <textarea class="journal-input mb-3" rows="2"></textarea>
+                <p class="mb-1 text-sm font-semibold">How old were you:</p>
+                <textarea class="journal-input mb-3" rows="1"></textarea>
+                <p class="mb-1 text-sm font-semibold">Worst part/image:</p>
+                <textarea class="journal-input mb-3" rows="2"></textarea>
+                <p class="mb-1 text-sm font-semibold">How it makes you think about yourself:</p>
+                <textarea class="journal-input mb-3" rows="2"></textarea>
+                <p class="mb-1 text-sm font-semibold">Emotions it brings up:</p>
+                <textarea class="journal-input mb-3" rows="2"></textarea>
+                <p class="mb-1 text-sm font-semibold">Where you feel it in your body:</p>
+                <textarea class="journal-input" rows="2"></textarea>
+            </div>
+            <div class="journal-box">
+                <h4 class="text-lg font-bold text-gray-700 mb-2">Memory 5:</h4>
+                <p class="mb-1 text-sm font-semibold">What happened:</p>
+                <textarea class="journal-input mb-3" rows="2"></textarea>
+                <p class="mb-1 text-sm font-semibold">How old were you:</p>
+                <textarea class="journal-input mb-3" rows="1"></textarea>
+                <p class="mb-1 text-sm font-semibold">Worst part/image:</p>
+                <textarea class="journal-input mb-3" rows="2"></textarea>
+                <p class="mb-1 text-sm font-semibold">How it makes you think about yourself:</p>
+                <textarea class="journal-input mb-3" rows="2"></textarea>
+                <p class="mb-1 text-sm font-semibold">Emotions it brings up:</p>
+                <textarea class="journal-input mb-3" rows="2"></textarea>
+                <p class="mb-1 text-sm font-semibold">Where you feel it in your body:</p>
+                <textarea class="journal-input" rows="2"></textarea>
+            </div>
+        </div>
+        
+        <!-- Healing Journal -->
+        <h2 class="text-2xl sm:text-3xl font-semibold text-gray-700 mt-12 mb-4 section-header">Your Healing Journal</h2>
         <p class="text-gray-600 mb-4 leading-relaxed">
-            Sometimes it can be difficult to name the beliefs that hold us back. This list can help you get a sense of what might be coming up for you. We can use these as a starting point to identify the core beliefs we'll work on together.
+            Writing between sessions can be a powerful part of your healing journey. Journaling helps you track your progress, process insights, and connect with your inner wisdom.
         </p>
 
-        <div class="space-y-8">
-            <div class="p-6 bg-[#f0e8e6] rounded-2xl border border-[#d8a2a0]">
-                <h3 class="text-xl font-bold text-gray-800 mb-4">Responsibility (I am defective)</h3>
-                <ul class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-gray-700">
-                    <li><input type="checkbox" class="mr-2 accent-[#d8a2a0]">I don't deserve love</li>
-                    <li><input type="checkbox" class="mr-2 accent-[#d8a2a0]">I am a bad person</li>
-                    <li><input type="checkbox" class="mr-2 accent-[#d8a2a0]">I am ugly (my body is hateful)</li>
-                    <li><input type="checkbox" class="mr-2 accent-[#d8a2a0]">I do not deserve...</li>
-                    <li><input type="checkbox" class="mr-2 accent-[#d8a2a0]">I am terrible</li>
-                    <li><input type="checkbox" class="mr-2 accent-[#d8a2a0]">I am stupid (not smart enough)</li>
-                    <li><input type="checkbox" class="mr-2 accent-[#d8a2a0]">I am worthless (inadequate)</li>
-                    <li><input type="checkbox" class="mr-2 accent-[#d8a2a0]">I am insignificant (unimportant)</li>
-                    <li><input type="checkbox" class="mr-2 accent-[#d8a2a0]">I am shameful</li>
-                    <li><input type="checkbox" class="mr-2 accent-[#d8a2a0]">I am a disappointment</li>
-                    <li><input type="checkbox" class="mr-2 accent-[#d8a2a0]">I am not lovable</li>
-                    <li><input type="checkbox" class="mr-2 accent-[#d8a2a0]">I am not good enough</li>
-                    <li><input type="checkbox" class="mr-2 accent-[#d8a2a0]">I deserve to die</li>
-                    <li><input type="checkbox" class="mr-2 accent-[#d8a2a0]">I deserve to be miserable</li>
-                    <li><input type="checkbox" class="mr-2 accent-[#d8a2a0]">I deserve only bad things</li>
-                    <li><input type="checkbox" class="mr-2 accent-[#d8a2a0]">I am different (don't belong)</li>
-                    <li><input type="checkbox" class="mr-2 accent-[#d8a2a0]">I am permanently damaged</li>
-                </ul>
-            </div>
-            
-            <div class="p-6 bg-[#f0e8e6] rounded-2xl border border-[#d8a2a0]">
-                <h3 class="text-xl font-bold text-gray-800 mb-4">Responsibility (I did something wrong)</h3>
-                <ul class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-gray-700">
-                    <li><input type="checkbox" class="mr-2 accent-[#d8a2a0]">I should have done something</li>
-                    <li><input type="checkbox" class="mr-2 accent-[#d8a2a0]">I should have known better</li>
-                    <li><input type="checkbox" class="mr-2 accent-[#d8a2a0]">I did something wrong</li>
-                </ul>
-            </div>
-            
-            <div class="p-6 bg-[#f0e8e6] rounded-2xl border border-[#d8a2a0]">
-                <h3 class="text-xl font-bold text-gray-800 mb-4">Safety/Vulnerability</h3>
-                <ul class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-gray-700">
-                    <li><input type="checkbox" class="mr-2 accent-[#d8a2a0]">I cannot be trusted</li>
-                    <li><input type="checkbox" class="mr-2 accent-[#d8a2a0]">I cannot trust myself</li>
-                    <li><input type="checkbox" class="mr-2 accent-[#d8a2a0]">I cannot trust my judgment</li>
-                    <li><input type="checkbox" class="mr-2 accent-[#d8a2a0]">I am in danger</li>
-                    <li><input type="checkbox" class="mr-2 accent-[#d8a2a0]">It's not OK to feel (show) my emotions</li>
-                    <li><input type="checkbox" class="mr-2 accent-[#d8a2a0]">I cannot trust anyone</li>
-                    <li><input type="checkbox" class="mr-2 accent-[#d8a2a0]">I cannot protect myself</li>
-                    <li><input type="checkbox" class="mr-2 accent-[#d8a2a0]">I cannot stand up for myself</li>
-                    <li><input type="checkbox" class="mr-2 accent-[#d8a2a0]">I cannot let it out</li>
-                </ul>
-            </div>
-            
-            <div class="p-6 bg-[#f0e8e6] rounded-2xl border border-[#d8a2a0]">
-                <h3 class="text-xl font-bold text-gray-800 mb-4">Control/Choices</h3>
-                <ul class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-gray-700">
-                    <li><input type="checkbox" class="mr-2 accent-[#d8a2a0]">I am not in control</li>
-                    <li><input type="checkbox" class="mr-2 accent-[#d8a2a0]">I cannot do...</li>
-                    <li><input type="checkbox" class="mr-2 accent-[#d8a2a0]">I am powerless (helpless)</li>
-                    <li><input type="checkbox" class="mr-2 accent-[#d8a2a0]">I am weak</li>
-                    <li><input type="checkbox" class="mr-2 accent-[#d8a2a0]">I cannot get what I want</li>
-                    <li><input type="checkbox" class="mr-2 accent-[#d8a2a0]">I cannot succeed</li>
-                    <li><input type="checkbox" class="mr-2 accent-[#d8a2a0]">I have to be perfect (please everyone)</li>
-                    <li><input type="checkbox" class="mr-2 accent-[#d8a2a0]">I cannot stand it</li>
-                    <li><input type="checkbox" class="mr-2 accent-[#d8a2a0]">I am a failure (will fail)</li>
-                </ul>
-            </div>
+        <!-- Journaling Prompts -->
+        <h3 class="text-xl sm:text-2xl font-semibold text-gray-800 mb-4">Journaling Prompts to Guide Your Practice</h3>
+        <ul class="list-disc list-inside text-gray-700 space-y-4">
+            <li><strong class="font-medium text-gray-800">Recording Your Experiences:</strong> Write about the specific memories we're working on in EMDR. Include not just what happened, but how you felt and any body sensations you remember.</li>
+            <li><strong class="font-medium text-gray-800">Noticing Triggers:</strong> Pay attention to what situations or events bring up intense emotions. Jot these down along with any memories or thoughts they trigger.</li>
+            <li><strong class="font-medium text-gray-800">Tracking Your Progress:</strong> Document the shifts you notice - changes in how you feel, new perspectives, or different reactions to old triggers. How are these changes showing up in your daily life?</li>
+            <li><strong class="font-medium text-gray-800">Exploring Insights:</strong> Use your journal to explore the "aha moments" that come up during or after our sessions. What new understandings are emerging about yourself or your experiences?</li>
+            <li><strong class="font-medium text-gray-800">Practicing Self-Compassion:</strong> Write kind messages to yourself. Acknowledge your courage in doing this work and remind yourself that healing happens at its own pace.</li>
+        </ul>
+
+        <!-- Connecting with Your Inner Wisdom -->
+        <h2 class="text-2xl sm:text-3xl font-semibold text-gray-700 mt-12 mb-4 section-header">Connecting with Your Inner Wisdom</h2>
+        <h3 class="text-xl sm:text-2xl font-semibold text-gray-800 mb-3 mt-6">Understanding Your Higher Self</h3>
+        <p class="text-gray-600 mb-4 leading-relaxed">
+            Your Higher Self is that wise, loving part of you that exists beyond your everyday worries and fears. It's the aspect of yourself that's connected to something larger - call it the Divine, Universal Consciousness, or simply your deepest wisdom. This part of you holds your creativity, intuition, and natural healing capacity.
+        </p>
+        
+        <!-- Questions for Higher Self -->
+        <h4 class="text-lg sm:text-xl font-medium text-gray-800 mb-2">Questions to Explore with Your Higher Self:</h4>
+        <div class="text-gray-700 space-y-2">
+            <p>How do I shame myself because of what I've been through, and how can I be more compassionate instead?</p>
+            <p>In what ways do I sabotage myself or block my own goals, and how can I become more supportive of myself?</p>
+            <p>What sadness or grief am I ready to release and transform into love and gratitude?</p>
         </div>
 
-        <!-- Closing Remarks -->
-        <p class="text-gray-600 mt-12 italic text-center text-lg">
-            Remember that this is a guide, not a test. We will use this information to begin the process of understanding and transforming these old beliefs. The bravest step is simply being willing to look at them.
+        <h3 class="text-xl sm:text-2xl font-semibold text-gray-800 mb-3 mt-6">Connecting with Your Inner Child</h3>
+        <p class="text-gray-600 mb-4 leading-relaxed">
+            Your inner child holds the memories of what you've experienced and how those experiences felt. This part of you needs your attention, care, and love. Sometimes feelings of anger, sadness, or disappointment arise because you're not giving yourself the care you deserve - these are signals from your inner child.
+        </p>
+        
+        <!-- Questions for Inner Child -->
+        <h4 class="text-lg sm:text-xl font-medium text-gray-800 mb-2">Questions for Your Inner Child:</h4>
+        <div class="text-gray-700 space-y-2">
+            <p>What anger or rage do you need me to know about? (Write freely without censoring)</p>
+            <p>What do you need from me to feel safe and loved?</p>
+            <p>How do you feel when I really listen to you?</p>
+            <p>What beliefs or messages make you feel angry or ashamed, and how can we replace them with more loving ones?</p>
+        </div>
+
+
+        <!-- Gentle Coping Strategies -->
+        <h2 class="text-2xl sm:text-3xl font-semibold text-gray-700 mt-12 mb-4 section-header">Gentle Coping Strategies</h2>
+        <p class="text-gray-600 mb-4 leading-relaxed">
+            If you feel overwhelmed between sessions:
+        </p>
+        <ul class="list-disc list-inside text-gray-700 space-y-2">
+            <li><strong class="font-medium text-gray-800">Ground yourself:</strong> Notice 5 things you can see, 4 you can hear, 3 you can touch, 2 you can smell, 1 you can taste</li>
+            <li><strong class="font-medium text-gray-800">Visit your safe place in your mind</strong></li>
+            <li><strong class="font-medium text-gray-800">Use bilateral stimulation:</strong> Gently cross your arms and pat your shoulders alternately (butterfly hug)</li>
+            <li><strong class="font-medium text-gray-800">Breathe slowly:</strong> In for 4, hold for 4, out for 6</li>
+            <li><strong class="font-medium text-gray-800">Call someone from your support network</strong></li>
+            <li><strong class="font-medium text-gray-800">Contact me if you need additional support</strong></li>
+        </ul>
+
+        <!-- Tracking Your Progress -->
+        <h2 class="text-2xl sm:text-3xl font-semibold text-gray-700 mt-12 mb-4 section-header">Tracking Your Progress</h2>
+        <div class="space-y-4 text-gray-700">
+            <p><strong class="font-medium text-gray-800">This week I feel:</strong></p>
+            <div class="flex items-center space-x-4">
+                <span class="font-semibold w-56">More peaceful about the past:</span>
+                <span class="flex-1"><input type="checkbox" class="mr-1 accent-[#D1D5DB]">Yes</span>
+                <span class="flex-1"><input type="checkbox" class="mr-1 accent-[#D1D5DB]">Sometimes</span>
+                <span class="flex-1"><input type="checkbox" class="mr-1 accent-[#D1D5DB]">Not yet</span>
+            </div>
+            <div class="flex items-center space-x-4">
+                <span class="font-semibold w-56">More confident in myself:</span>
+                <span class="flex-1"><input type="checkbox" class="mr-1 accent-[#D1D5DB]">Yes</span>
+                <span class="flex-1"><input type="checkbox" class="mr-1 accent-[#D1D5DB]">Sometimes</span>
+                <span class="flex-1"><input type="checkbox" class="mr-1 accent-[#D1D5DB]">Not yet</span>
+            </div>
+            <div class="flex items-center space-x-4">
+                <span class="font-semibold w-56">More hopeful about the future:</span>
+                <span class="flex-1"><input type="checkbox" class="mr-1 accent-[#D1D5DB]">Yes</span>
+                <span class="flex-1"><input type="checkbox" class="mr-1 accent-[#D1D5DB]">Sometimes</span>
+                <span class="flex-1"><input type="checkbox" class="mr-1 accent-[#D1D5DB]">Not yet</span>
+            </div>
+            <div class="flex items-center space-x-4">
+                <span class="font-semibold w-56">More connected to others:</span>
+                <span class="flex-1"><input type="checkbox" class="mr-1 accent-[#D1D5DB]">Yes</span>
+                <span class="flex-1"><input type="checkbox" class="mr-1 accent-[#D1D5DB]">Sometimes</span>
+                <span class="flex-1"><input type="checkbox" class="mr-1 accent-[#D1D5DB]">Not yet</span>
+            </div>
+            <div class="mt-6">
+                <p class="font-semibold">The biggest change I've noticed:</p>
+                <textarea class="journal-input mt-2" rows="3"></textarea>
+            </div>
+            <div>
+                <p class="font-semibold">What I want to focus on next:</p>
+                <textarea class="journal-input mt-2" rows="3"></textarea>
+            </div>
+        </div>
+        
+        <!-- Important Reminders -->
+        <h2 class="text-2xl sm:text-3xl font-semibold text-gray-700 mt-12 mb-4 section-header">Important Reminders</h2>
+        <div class="p-6 bg-[#f0e8e6] rounded-2xl border border-[#D1D5DB]">
+            <ul class="list-disc list-inside text-gray-700 space-y-2">
+                <li><strong class="font-medium text-gray-800">Healing isn't linear</strong> - some days will be easier than others</li>
+                <li><strong class="font-medium text-gray-800">You're braver than you know</strong> for doing this work</li>
+                <li><strong class="font-medium text-gray-800">Small changes are still meaningful changes</strong></li>
+                <li><strong class="font-medium text-gray-800">You don't have to do this alone</strong></li>
+                <li><strong class="font-medium text-gray-800">Your pace is the right pace</strong></li>
+                <li><strong class="font-medium text-gray-800">You deserve healing and peace</strong></li>
+            </ul>
+        </div>
+
+        <!-- Emergency Support -->
+        <h2 class="text-2xl sm:text-3xl font-semibold text-red-600 mt-12 mb-4 section-header">Emergency Support</h2>
+        <div class="p-6 bg-red-50 rounded-2xl border border-red-100">
+            <p class="text-gray-800 font-semibold mb-2">If you're in crisis or feel unsafe:</p>
+            <ul class="list-disc list-inside text-gray-700 space-y-2">
+                <li><strong class="font-medium text-gray-800">Call 988</strong> (Suicide & Crisis Lifeline)</li>
+                <li><strong class="font-medium text-gray-800">Go to your nearest emergency room</strong></li>
+                <li><strong class="font-medium text-gray-800">Call 911</strong></li>
+                <li><strong class="font-medium text-gray-800">Contact me if possible</strong></li>
+            </ul>
+            <p class="text-gray-600 italic mt-4">Remember: Reaching out for help is a sign of strength, not weakness.</p>
+        </div>
+        
+        <!-- Final Paragraph -->
+        <p class="text-gray-600 mt-8 italic text-center text-lg">
+            This guide is your companion on your healing journey. Use what feels helpful and leave what doesn't. Trust yourself - you know what you need.
         </p>
 
     </div>
 
 </body>
 </html>
+
