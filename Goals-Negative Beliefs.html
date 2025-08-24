@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EMDR: Goals and Beliefs</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            background-color: #f4f0ed; /* Dusty background */
+        }
+        h1, h2, h3, h4 {
+            font-family: 'Cormorant Garamond', serif;
+        }
+        .section-header {
+            position: relative;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .section-header::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px;
+            height: 3px;
+            background-color: #d8a2a0; /* Dusty rose accent */
+            border-radius: 9999px;
+        }
+        .journal-box {
+            background-color: #f0e8e6; /* Dusty rose background for journaling sections */
+            border-left: 4px solid #d8a2a0; /* Dusty rose border */
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+        .journal-input {
+            width: 100%;
+            min-height: 3rem;
+            border: 1px solid #d1d5db;
+            background-color: #fff;
+            padding: 0.5rem;
+            border-radius: 0.375rem;
+            resize: vertical;
+        }
+    </style>
+</head>
+<body class="p-4 sm:p-8">
+
+    <!-- Main Container -->
+    <div class="max-w-4xl mx-auto bg-white p-6 sm:p-10 rounded-3xl shadow-2xl border border-gray-100">
+
+        <!-- Introductory Header -->
+        <h1 class="text-3xl sm:text-4xl font-bold text-center text-gray-800 mb-6 sm:mb-8">Your Healing Goals</h1>
+        <p class="text-gray-600 mb-6 leading-relaxed text-lg">
+            This guide is designed to help you clarify what you'd like to change and begin to identify old beliefs that may be holding you back. Think of this as a way to get curious about your inner world and create a roadmap for our work together. There are no right or wrong answers, and we can always explore this in our sessions if it feels overwhelming.
+        </p>
+
+        <!-- What I'd Like to Change Section -->
+        <h2 class="text-2xl sm:text-3xl font-semibold text-gray-700 mt-8 mb-4 section-header">What I'd Like to Change</h2>
+        <div class="space-y-6">
+            <div class="journal-box">
+                <h4 class="text-lg font-bold text-gray-700 mb-2">Behavior</h4>
+                <p class="mb-1 text-sm font-semibold">What are you doing that you don't want to do?</p>
+                <textarea class="journal-input mb-3" rows="2"></textarea>
+                <p class="mb-1 text-sm font-semibold">What are you not doing (or not doing enough) that you do want to do?</p>
+                <textarea class="journal-input" rows="2"></textarea>
+            </div>
+            <div class="journal-box">
+                <h4 class="text-lg font-bold text-gray-700 mb-2">Emotions</h4>
+                <p class="mb-1 text-sm font-semibold">What are you feeling that you don't want to feel?</p>
+                <textarea class="journal-input mb-3" rows="2"></textarea>
+                <p class="mb-1 text-sm font-semibold">What are you not feeling (or not feeling as much as you'd like) that you do want to feel?</p>
+                <textarea class="journal-input" rows="2"></textarea>
+            </div>
+            <div class="journal-box">
+                <h4 class="text-lg font-bold text-gray-700 mb-2">Sensations</h4>
+                <p class="mb-1 text-sm font-semibold">What are you feeling (physically) that you don't want to feel?</p>
+                <textarea class="journal-input mb-3" rows="2"></textarea>
+                <p class="mb-1 text-sm font-semibold">What are you not feeling (physically) that you do want to feel?</p>
+                <textarea class="journal-input" rows="2"></textarea>
+            </div>
+            <div class="journal-box">
+                <h4 class="text-lg font-bold text-gray-700 mb-2">Thoughts</h4>
+                <p class="mb-1 text-sm font-semibold">What are you thinking that you don't want to think (believe)?</p>
+                <textarea class="journal-input mb-3" rows="2"></textarea>
+                <p class="mb-1 text-sm font-semibold">What are you not thinking that you do want to think (believe)?</p>
+                <textarea class="journal-input" rows="2"></textarea>
+            </div>
+        </div>
+
+        <!-- Examples of Negative Beliefs Section -->
+        <h2 class="text-2xl sm:text-3xl font-semibold text-gray-700 mt-12 mb-4 section-header">Examples of Negative Beliefs</h2>
+        <p class="text-gray-600 mb-4 leading-relaxed">
+            Sometimes it can be difficult to name the beliefs that hold us back. This list can help you get a sense of what might be coming up for you. We can use these as a starting point to identify the core beliefs we'll work on together.
+        </p>
+
+        <div class="space-y-8">
+            <div class="p-6 bg-[#f0e8e6] rounded-2xl border border-[#d8a2a0]">
+                <h3 class="text-xl font-bold text-gray-800 mb-4">Responsibility (I am defective)</h3>
+                <ul class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-gray-700">
+                    <li><input type="checkbox" class="mr-2 accent-[#d8a2a0]">I don't deserve love</li>
+                    <li><input type="checkbox" class="mr-2 accent-[#d8a2a0]">I am a bad person</li>
+                    <li><input type="checkbox" class="mr-2 accent-[#d8a2a0]">I am ugly (my body is hateful)</li>
+                    <li><input type="checkbox" class="mr-2 accent-[#d8a2a0]">I do not deserve...</li>
+                    <li><input type="checkbox" class="mr-2 accent-[#d8a2a0]">I am terrible</li>
+                    <li><input type="checkbox" class="mr-2 accent-[#d8a2a0]">I am stupid (not smart enough)</li>
+                    <li><input type="checkbox" class="mr-2 accent-[#d8a2a0]">I am worthless (inadequate)</li>
+                    <li><input type="checkbox" class="mr-2 accent-[#d8a2a0]">I am insignificant (unimportant)</li>
+                    <li><input type="checkbox" class="mr-2 accent-[#d8a2a0]">I am shameful</li>
+                    <li><input type="checkbox" class="mr-2 accent-[#d8a2a0]">I am a disappointment</li>
+                    <li><input type="checkbox" class="mr-2 accent-[#d8a2a0]">I am not lovable</li>
+                    <li><input type="checkbox" class="mr-2 accent-[#d8a2a0]">I am not good enough</li>
+                    <li><input type="checkbox" class="mr-2 accent-[#d8a2a0]">I deserve to die</li>
+                    <li><input type="checkbox" class="mr-2 accent-[#d8a2a0]">I deserve to be miserable</li>
+                    <li><input type="checkbox" class="mr-2 accent-[#d8a2a0]">I deserve only bad things</li>
+                    <li><input type="checkbox" class="mr-2 accent-[#d8a2a0]">I am different (don't belong)</li>
+                    <li><input type="checkbox" class="mr-2 accent-[#d8a2a0]">I am permanently damaged</li>
+                </ul>
+            </div>
+            
+            <div class="p-6 bg-[#f0e8e6] rounded-2xl border border-[#d8a2a0]">
+                <h3 class="text-xl font-bold text-gray-800 mb-4">Responsibility (I did something wrong)</h3>
+                <ul class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-gray-700">
+                    <li><input type="checkbox" class="mr-2 accent-[#d8a2a0]">I should have done something</li>
+                    <li><input type="checkbox" class="mr-2 accent-[#d8a2a0]">I should have known better</li>
+                    <li><input type="checkbox" class="mr-2 accent-[#d8a2a0]">I did something wrong</li>
+                </ul>
+            </div>
+            
+            <div class="p-6 bg-[#f0e8e6] rounded-2xl border border-[#d8a2a0]">
+                <h3 class="text-xl font-bold text-gray-800 mb-4">Safety/Vulnerability</h3>
+                <ul class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-gray-700">
+                    <li><input type="checkbox" class="mr-2 accent-[#d8a2a0]">I cannot be trusted</li>
+                    <li><input type="checkbox" class="mr-2 accent-[#d8a2a0]">I cannot trust myself</li>
+                    <li><input type="checkbox" class="mr-2 accent-[#d8a2a0]">I cannot trust my judgment</li>
+                    <li><input type="checkbox" class="mr-2 accent-[#d8a2a0]">I am in danger</li>
+                    <li><input type="checkbox" class="mr-2 accent-[#d8a2a0]">It's not OK to feel (show) my emotions</li>
+                    <li><input type="checkbox" class="mr-2 accent-[#d8a2a0]">I cannot trust anyone</li>
+                    <li><input type="checkbox" class="mr-2 accent-[#d8a2a0]">I cannot protect myself</li>
+                    <li><input type="checkbox" class="mr-2 accent-[#d8a2a0]">I cannot stand up for myself</li>
+                    <li><input type="checkbox" class="mr-2 accent-[#d8a2a0]">I cannot let it out</li>
+                </ul>
+            </div>
+            
+            <div class="p-6 bg-[#f0e8e6] rounded-2xl border border-[#d8a2a0]">
+                <h3 class="text-xl font-bold text-gray-800 mb-4">Control/Choices</h3>
+                <ul class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-gray-700">
+                    <li><input type="checkbox" class="mr-2 accent-[#d8a2a0]">I am not in control</li>
+                    <li><input type="checkbox" class="mr-2 accent-[#d8a2a0]">I cannot do...</li>
+                    <li><input type="checkbox" class="mr-2 accent-[#d8a2a0]">I am powerless (helpless)</li>
+                    <li><input type="checkbox" class="mr-2 accent-[#d8a2a0]">I am weak</li>
+                    <li><input type="checkbox" class="mr-2 accent-[#d8a2a0]">I cannot get what I want</li>
+                    <li><input type="checkbox" class="mr-2 accent-[#d8a2a0]">I cannot succeed</li>
+                    <li><input type="checkbox" class="mr-2 accent-[#d8a2a0]">I have to be perfect (please everyone)</li>
+                    <li><input type="checkbox" class="mr-2 accent-[#d8a2a0]">I cannot stand it</li>
+                    <li><input type="checkbox" class="mr-2 accent-[#d8a2a0]">I am a failure (will fail)</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Closing Remarks -->
+        <p class="text-gray-600 mt-12 italic text-center text-lg">
+            Remember that this is a guide, not a test. We will use this information to begin the process of understanding and transforming these old beliefs. The bravest step is simply being willing to look at them.
+        </p>
+
+    </div>
+
+</body>
+</html>
