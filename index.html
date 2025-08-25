@@ -144,7 +144,7 @@
                 <img src="https://i.imgur.com/JwAdvDd.png" alt="Janice LaFountaine, MS, LMFT Logo" class="h-24 w-auto rounded-full shadow-md">
             </div>
             <div class="flex-grow">
-                <h1 class="text-3xl sm:text-4xl font-bold text-gray-800 mb-4">Your Healing Journey Workbook</h1>
+                <h1 class="text-3xl sm:text-4xl font-bold text-gray-800 mb-4">Your Healing Goals Workbook</h1>
                 <p class="text-gray-600 leading-relaxed text-lg mb-4">
                     This interactive guide is designed to help you explore what you'd like to change and gently identify beliefs that may be holding you back. Think of this as an invitation to get curious about your inner world and create a roadmap for our work together.
                 </p>
@@ -394,7 +394,7 @@
         
         function saveData(key, value) {
             try {
-                localStorage.setItem(`emdr_workbook_${key}`, value);
+                localStorage.setItem(`emdr_goals_${key}`, value);
                 showSaveIndicator('saved');
             } catch (e) {
                 console.error('Error saving data:', e);
@@ -405,7 +405,7 @@
             // Load text areas
             document.querySelectorAll('textarea[data-key]').forEach(textarea => {
                 const key = textarea.getAttribute('data-key');
-                const savedValue = localStorage.getItem(`emdr_workbook_${key}`);
+                const savedValue = localStorage.getItem(`emdr_goals_${key}`);
                 if (savedValue) {
                     textarea.value = savedValue;
                 }
@@ -414,7 +414,7 @@
             // Load checkboxes
             document.querySelectorAll('input[type="checkbox"][data-key]').forEach(checkbox => {
                 const key = checkbox.getAttribute('data-key');
-                const savedValue = localStorage.getItem(`emdr_workbook_${key}`);
+                const savedValue = localStorage.getItem(`emdr_goals_${key}`);
                 if (savedValue === 'true') {
                     checkbox.checked = true;
                 }
@@ -452,39 +452,183 @@
                 day: 'numeric' 
             });
             
-            let exportText = `EMDR Healing Journey Workbook - ${dateStr}\n`;
+            let exportText = `EMDR Goals & Beliefs Workbook - ${dateStr}\n`;
             exportText += `Generated from session with Janice LaFountaine, MS, LMFT\n`;
             exportText += `${'='.repeat(60)}\n\n`;
             
-            // Behaviors
-            const behaviorStop = localStorage.getItem('emdr_workbook_behavior-stop') || '';
-            const behaviorStart = localStorage.getItem('emdr_workbook_behavior-start') || '';
-            if (behaviorStop || behaviorStart) {
-                exportText += `BEHAVIORS & ACTIONS\n${'-'.repeat(25)}\n`;
-                if (behaviorStop) exportText += `What I'd like to release:\n${behaviorStop}\n\n`;
-                if (behaviorStart) exportText += `What I'd like to embrace:\n${behaviorStart}\n\n`;
+            // What I'd Like to Transform
+            const behaviorStop = localStorage.getItem('emdr_goals_behavior-stop') || '';
+            const behaviorStart = localStorage.getItem('emdr_goals_behavior-start') || '';
+            const emotionsStop = localStorage.getItem('emdr_goals_emotions-stop') || '';
+            const emotionsStart = localStorage.getItem('emdr_goals_emotions-start') || '';
+            const sensationsStop = localStorage.getItem('emdr_goals_sensations-stop') || '';
+            const sensationsStart = localStorage.getItem('emdr_goals_sensations-start') || '';
+            const thoughtsStop = localStorage.getItem('emdr_goals_thoughts-stop') || '';
+            const thoughtsStart = localStorage.getItem('emdr_goals_thoughts-start') || '';
+            
+            if (behaviorStop || behaviorStart || emotionsStop || emotionsStart || 
+                sensationsStop || sensationsStart || thoughtsStop || thoughtsStart) {
+                exportText += `WHAT I'D LIKE TO TRANSFORM\n${'-'.repeat(35)}\n\n`;
+                
+                if (behaviorStop || behaviorStart) {
+                    exportText += `BEHAVIORS & ACTIONS:\n`;
+                    if (behaviorStop) exportText += `What no longer serves me:\n${behaviorStop}\n\n`;
+                    if (behaviorStart) exportText += `What I'd like to do more of:\n${behaviorStart}\n\n`;
+                }
+                
+                if (emotionsStop || emotionsStart) {
+                    exportText += `EMOTIONS & FEELINGS:\n`;
+                    if (emotionsStop) exportText += `Overwhelming emotions:\n${emotionsStop}\n\n`;
+                    if (emotionsStart) exportText += `Emotions I'd like more of:\n${emotionsStart}\n\n`;
+                }
+                
+                if (sensationsStop || sensationsStart) {
+                    exportText += `BODY & SENSATIONS:\n`;
+                    if (sensationsStop) exportText += `Uncomfortable sensations:\n${sensationsStop}\n\n`;
+                    if (sensationsStart) exportText += `How I'd like to feel:\n${sensationsStart}\n\n`;
+                }
+                
+                if (thoughtsStop || thoughtsStart) {
+                    exportText += `THOUGHTS & BELIEFS:\n`;
+                    if (thoughtsStop) exportText += `Limiting thoughts/beliefs:\n${thoughtsStop}\n\n`;
+                    if (thoughtsStart) exportText += `Empowering beliefs I'd like:\n${thoughtsStart}\n\n`;
+                }
             }
             
-            // Emotions
-            const emotionsStop = localStorage.getItem('emdr_workbook_emotions-stop') || '';
-            const emotionsStart = localStorage.getItem('emdr_workbook_emotions-start') || '';
-            if (emotionsStop || emotionsStart) {
-                exportText += `EMOTIONS & FEELINGS\n${'-'.repeat(25)}\n`;
-                if (emotionsStop) exportText += `Emotions seeking support:\n${emotionsStop}\n\n`;
-                if (emotionsStart) exportText += `Emotions I'd like to cultivate:\n${emotionsStart}\n\n`;
+            // Beliefs exploration
+            const beliefCategories = [
+                {
+                    title: 'SELF-WORTH BELIEFS',
+                    beliefs: [
+                        { key: 'belief-no-love', text: 'I don\'t deserve love' },
+                        { key: 'belief-bad-person', text: 'I am a bad person' },
+                        { key: 'belief-ugly', text: 'I am ugly (my body is hateful)' },
+                        { key: 'belief-no-deserve', text: 'I don\'t deserve good things' },
+                        { key: 'belief-terrible', text: 'I am terrible' },
+                        { key: 'belief-stupid', text: 'I am stupid (not smart enough)' },
+                        { key: 'belief-worthless', text: 'I am worthless (inadequate)' },
+                        { key: 'belief-insignificant', text: 'I am insignificant (unimportant)' },
+                        { key: 'belief-shameful', text: 'I am shameful' },
+                        { key: 'belief-disappointment', text: 'I am a disappointment' },
+                        { key: 'belief-not-lovable', text: 'I am not lovable' },
+                        { key: 'belief-not-good-enough', text: 'I am not good enough' },
+                        { key: 'belief-deserve-die', text: 'I deserve to die' },
+                        { key: 'belief-deserve-misery', text: 'I deserve to be miserable' },
+                        { key: 'belief-deserve-bad', text: 'I deserve only bad things' },
+                        { key: 'belief-different', text: 'I am different (don\'t belong)' },
+                        { key: 'belief-damaged', text: 'I am permanently damaged' }
+                    ]
+                },
+                {
+                    title: 'RESPONSIBILITY & BLAME BELIEFS',
+                    beliefs: [
+                        { key: 'blame-should-have-done', text: 'I should have done something' },
+                        { key: 'blame-should-have-known', text: 'I should have known better' },
+                        { key: 'blame-did-wrong', text: 'I did something wrong' }
+                    ]
+                },
+                {
+                    title: 'SAFETY & TRUST BELIEFS',
+                    beliefs: [
+                        { key: 'safety-cannot-be-trusted', text: 'I cannot be trusted' },
+                        { key: 'safety-cannot-trust-self', text: 'I cannot trust myself' },
+                        { key: 'safety-cannot-trust-judgment', text: 'I cannot trust my judgment' },
+                        { key: 'safety-in-danger', text: 'I am in danger' },
+                        { key: 'safety-no-emotions', text: 'It\'s not OK to feel (show) my emotions' },
+                        { key: 'safety-trust-no-one', text: 'I cannot trust anyone' },
+                        { key: 'safety-cannot-protect', text: 'I cannot protect myself' },
+                        { key: 'safety-cannot-stand-up', text: 'I cannot stand up for myself' },
+                        { key: 'safety-cannot-let-out', text: 'I cannot let it out' }
+                    ]
+                },
+                {
+                    title: 'PERSONAL POWER & CONTROL BELIEFS',
+                    beliefs: [
+                        { key: 'control-not-in-control', text: 'I am not in control' },
+                        { key: 'control-cannot-do', text: 'I cannot do (what I need to do)' },
+                        { key: 'control-powerless', text: 'I am powerless (helpless)' },
+                        { key: 'control-weak', text: 'I am weak' },
+                        { key: 'control-cannot-get-want', text: 'I cannot get what I want' },
+                        { key: 'control-cannot-succeed', text: 'I cannot succeed' },
+                        { key: 'control-be-perfect', text: 'I have to be perfect (please everyone)' },
+                        { key: 'control-cannot-stand-it', text: 'I cannot stand it' },
+                        { key: 'control-failure', text: 'I am a failure (will fail)' }
+                    ]
+                }
+            ];
+            
+            let hasBeliefs = false;
+            beliefCategories.forEach(category => {
+                const checkedBeliefs = category.beliefs.filter(belief => 
+                    localStorage.getItem(`emdr_goals_${belief.key}`) === 'true'
+                );
+                
+                if (checkedBeliefs.length > 0) {
+                    if (!hasBeliefs) {
+                        exportText += `BELIEFS THAT RESONATE\n${'-'.repeat(30)}\n\n`;
+                        hasBeliefs = true;
+                    }
+                    
+                    exportText += `${category.title}:\n`;
+                    checkedBeliefs.forEach(belief => {
+                        exportText += `  ✓ ${belief.text}\n`;
+                    });
+                    exportText += '\n';
+                }
+            });
+            
+            // Additional reflections
+            const additionalReflections = localStorage.getItem('emdr_goals_additional-reflections') || '';
+            if (additionalReflections) {
+                exportText += `ADDITIONAL REFLECTIONS\n${'-'.repeat(25)}\n${additionalReflections}\n\n`;
             }
             
-            // Sensations
-            const sensationsStop = localStorage.getItem('emdr_workbook_sensations-stop') || '';
-            const sensationsStart = localStorage.getItem('emdr_workbook_sensations-start') || '';
-            if (sensationsStop || sensationsStart) {
-                exportText += `BODY & SENSATIONS\n${'-'.repeat(25)}\n`;
-                if (sensationsStop) exportText += `Uncomfortable sensations:\n${sensationsStop}\n\n`;
-                if (sensationsStart) exportText += `How I'd like to feel:\n${sensationsStart}\n\n`;
-            }
+            // Add timestamp
+            exportText += `\nGenerated: ${now.toLocaleString()}\n`;
             
-            // Thoughts
-            const thoughtsStop = localStorage.getItem('emdr_workbook_thoughts-stop') || '';
-            const thoughtsStart = localStorage.getItem('emdr_workbook_thoughts-start') || '';
-            if (thoughtsStop || thoughtsStart) {
-                exportText += `THOUGHTS & BELIEFS\n${'-
+            // Create and download file
+            const blob = new Blob([exportText], { type: 'text/plain' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `EMDR-Goals-Beliefs-${now.toISOString().split('T')[0]}.txt`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+        }
+        
+        function clearAllData() {
+            if (confirm('Are you sure you want to clear all your responses? This cannot be undone.')) {
+                // Get all keys that start with our prefix
+                const keys = Object.keys(localStorage).filter(key => key.startsWith('emdr_goals_'));
+                
+                // Remove all our data
+                keys.forEach(key => localStorage.removeItem(key));
+                
+                // Clear all form fields
+                document.querySelectorAll('textarea[data-key]').forEach(textarea => {
+                    textarea.value = '';
+                });
+                
+                document.querySelectorAll('input[type="checkbox"][data-key]').forEach(checkbox => {
+                    checkbox.checked = false;
+                });
+                
+                alert('All responses have been cleared.');
+            }
+        }
+        
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            loadData();
+            setupAutoSave();
+        });
+
+        // Make functions globally accessible
+        window.exportData = exportData;
+        window.clearAllData = clearAllData;
+    </script>
+
+</body>
+</html>
