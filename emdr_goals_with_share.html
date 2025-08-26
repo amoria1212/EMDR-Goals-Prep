@@ -1,0 +1,996 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Preparing for Healing: EMDR Goals & Beliefs</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            background-color: #f4f0ed;
+        }
+        h1, h2, h3, h4 {
+            font-family: 'Cormorant Garamond', serif;
+        }
+        .section-header {
+            position: relative;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .section-header::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px;
+            height: 3px;
+            background-color: #D1D5DB;
+            border-radius: 9999px;
+        }
+        .journal-box {
+            background-color: #f0e8e6;
+            border-left: 4px solid #D1D5DB;
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+        .journal-input {
+            width: 100%;
+            min-height: 3rem;
+            border: 1px solid #d1d5db;
+            background-color: #fff;
+            padding: 0.5rem;
+            border-radius: 0.375rem;
+            resize: vertical;
+            transition: border-color 0.2s ease;
+        }
+        .journal-input:focus {
+            outline: none;
+            border-color: #9CA3AF;
+            box-shadow: 0 0 0 3px rgba(156, 163, 175, 0.1);
+        }
+        .save-indicator {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+        .save-indicator.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .save-indicator.saving {
+            background-color: #FEF3C7;
+            color: #92400E;
+        }
+        .save-indicator.saved {
+            background-color: #D1FAE5;
+            color: #065F46;
+        }
+        .save-indicator.error {
+            background-color: #FEE2E2;
+            color: #991B1B;
+        }
+        .save-indicator.success {
+            background-color: #D1FAE5;
+            color: #065F46;
+        }
+        .btn {
+            transition: all 0.2s ease;
+            font-weight: 500;
+        }
+        .btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+        .checkbox-custom {
+            width: 18px;
+            height: 18px;
+            margin-right: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .checkbox-custom:checked {
+            accent-color: #D1D5DB;
+        }
+        @media print {
+            .no-print {
+                display: none !important;
+            }
+            body {
+                background-color: white !important;
+            }
+            .journal-box {
+                background-color: #f9f9f9 !important;
+                page-break-inside: avoid;
+            }
+        }
+        .gentle-reminder {
+            background: linear-gradient(135deg, #f0e8e6 0%, #f4f0ed 100%);
+            border: 1px solid #e5e7eb;
+        }
+        
+        /* Share Modal Styles */
+        .share-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        .share-modal.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        .share-modal-content {
+            background: white;
+            border-radius: 1rem;
+            padding: 2rem;
+            max-width: 500px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+        }
+        .share-modal.show .share-modal-content {
+            transform: scale(1);
+        }
+        .share-option {
+            border: 1px solid #e5e7eb;
+            border-radius: 0.75rem;
+            padding: 1rem;
+            margin-bottom: 0.75rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .share-option:hover {
+            background-color: #f9fafb;
+            border-color: #d1d5db;
+            transform: translateY(-1px);
+        }
+        .share-option-icon {
+            font-size: 1.5rem;
+            width: 2.5rem;
+            text-align: center;
+        }
+        .close-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #6b7280;
+            padding: 0.25rem;
+            border-radius: 50%;
+            transition: background-color 0.2s ease;
+        }
+        .close-modal:hover {
+            background-color: #f3f4f6;
+            color: #374151;
+        }
+    </style>
+</head>
+<body class="p-4 sm:p-8">
+
+    <!-- Save Indicator -->
+    <div id="saveIndicator" class="save-indicator">
+        <span id="saveText">Auto-saving...</span>
+    </div>
+
+    <!-- Share Modal -->
+    <div id="shareModal" class="share-modal">
+        <div class="share-modal-content">
+            <button class="close-modal" onclick="closeShareModal()">&times;</button>
+            <h3 class="text-xl font-bold text-gray-800 mb-4">Share Your Responses</h3>
+            <p class="text-gray-600 text-sm mb-6">Choose how you'd like to share your EMDR goals and beliefs workbook:</p>
+            
+            <div id="shareOptions">
+                <div class="share-option" onclick="shareViaEmail()">
+                    <div class="share-option-icon">📧</div>
+                    <div>
+                        <div class="font-semibold text-gray-800">Email</div>
+                        <div class="text-sm text-gray-600">Open your email client with pre-filled content</div>
+                    </div>
+                </div>
+                
+                <div class="share-option" onclick="copyToClipboard()">
+                    <div class="share-option-icon">📋</div>
+                    <div>
+                        <div class="font-semibold text-gray-800">Copy to Clipboard</div>
+                        <div class="text-sm text-gray-600">Copy formatted text to paste elsewhere</div>
+                    </div>
+                </div>
+                
+                <div id="webShareOption" class="share-option" onclick="shareViaWebAPI()" style="display: none;">
+                    <div class="share-option-icon">🔗</div>
+                    <div>
+                        <div class="font-semibold text-gray-800">Share</div>
+                        <div class="text-sm text-gray-600">Use your device's built-in sharing options</div>
+                    </div>
+                </div>
+                
+                <div class="share-option" onclick="downloadFile()">
+                    <div class="share-option-icon">💾</div>
+                    <div>
+                        <div class="font-semibold text-gray-800">Download File</div>
+                        <div class="text-sm text-gray-600">Save as a text file to your device</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-6 p-3 bg-yellow-50 border border-yellow-200 rounded-lg">
+                <p class="text-sm text-yellow-800">
+                    <strong>Privacy Reminder:</strong> Please be thoughtful about sharing personal information. Consider who will have access to your responses and choose secure sharing methods when appropriate.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="max-w-4xl mx-auto bg-white p-6 sm:p-10 rounded-3xl shadow-2xl border border-gray-100">
+
+        <!-- Action Buttons -->
+        <div class="no-print flex flex-wrap gap-3 mb-6 justify-center sm:justify-end">
+            <button id="shareBtn" class="btn bg-purple-100 hover:bg-purple-200 text-purple-800 px-4 py-2 rounded-lg">
+                🔗 Share
+            </button>
+            <button id="exportBtn" class="btn bg-blue-100 hover:bg-blue-200 text-blue-800 px-4 py-2 rounded-lg">
+                📄 Export Responses
+            </button>
+            <button id="printBtn" class="btn bg-green-100 hover:bg-green-200 text-green-800 px-4 py-2 rounded-lg">
+                🖨️ Print
+            </button>
+            <button id="clearBtn" class="btn bg-red-100 hover:bg-red-200 text-red-800 px-4 py-2 rounded-lg">
+                🗑️ Clear All
+            </button>
+        </div>
+
+        <!-- Introductory Header with Logo -->
+        <header class="flex flex-col items-center mb-8 text-center">
+            <div class="mb-4">
+                <img src="https://i.imgur.com/JwAdvDd.png" alt="Janice LaFountaine, MS, LMFT Logo" class="h-24 w-auto rounded-full shadow-md">
+            </div>
+            <div class="flex-grow">
+                <h1 class="text-3xl sm:text-4xl font-bold text-gray-800 mb-4">Preparing for Healing: EMDR Goals & Beliefs</h1>
+                <p class="text-gray-600 leading-relaxed text-lg mb-4">
+                    This interactive guide is designed to help you explore what you'd like to change and gently identify beliefs that may be holding you back. Think of this as an invitation to get curious about your inner world and create a roadmap for our work together.
+                </p>
+                <div class="gentle-reminder rounded-xl p-4 text-sm text-gray-700">
+                    <p class="mb-2">💡 <strong>Gentle Reminder:</strong> There are no right or wrong answers here. Healing isn't linear, and every small step matters.</p>
+                    <p>Your responses are automatically saved as you type, so you can take breaks whenever you need them.</p>
+                </div>
+            </div>
+        </header>
+
+        <!-- What I'd Like to Change Section -->
+        <h2 class="text-2xl sm:text-3xl font-semibold text-gray-700 mt-12 mb-6 section-header">What I'd Like to Transform</h2>
+        <p class="text-gray-600 mb-6 leading-relaxed">
+            Take a moment to reflect on different aspects of your experience. Remember, awareness is the first step toward change, and you're already being brave by looking at these areas.
+        </p>
+
+        <div class="space-y-6">
+            <div class="journal-box">
+                <h4 class="text-lg font-bold text-gray-700 mb-4">🎭 Behaviors & Actions</h4>
+                <p class="mb-2 text-sm font-semibold text-gray-600">What am I doing that no longer serves me?</p>
+                <textarea class="journal-input mb-4" rows="3" data-key="behavior-stop" placeholder="Take your time... What patterns would you like to release?"></textarea>
+                <p class="mb-2 text-sm font-semibold text-gray-600">What would I like to do more of (or start doing)?</p>
+                <textarea class="journal-input" rows="3" data-key="behavior-start" placeholder="What actions would bring you closer to who you want to be?"></textarea>
+            </div>
+
+            <div class="journal-box">
+                <h4 class="text-lg font-bold text-gray-700 mb-4">💝 Emotions & Feelings</h4>
+                <p class="mb-2 text-sm font-semibold text-gray-600">What emotions feel overwhelming or unwelcome right now?</p>
+                <textarea class="journal-input mb-4" rows="3" data-key="emotions-stop" placeholder="All feelings are valid... What emotions would you like support with?"></textarea>
+                <p class="mb-2 text-sm font-semibold text-gray-600">What emotions would you like to feel more often?</p>
+                <textarea class="journal-input" rows="3" data-key="emotions-start" placeholder="What would emotional wellness look like for you?"></textarea>
+            </div>
+
+            <div class="journal-box">
+                <h4 class="text-lg font-bold text-gray-700 mb-4">🌊 Body & Sensations</h4>
+                <p class="mb-2 text-sm font-semibold text-gray-600">What physical sensations feel uncomfortable or concerning?</p>
+                <textarea class="journal-input mb-4" rows="3" data-key="sensations-stop" placeholder="Your body holds wisdom... What is it trying to tell you?"></textarea>
+                <p class="mb-2 text-sm font-semibold text-gray-600">How would you like to feel in your body?</p>
+                <textarea class="journal-input" rows="3" data-key="sensations-start" placeholder="Imagine feeling at home in your body... What would that be like?"></textarea>
+            </div>
+
+            <div class="journal-box">
+                <h4 class="text-lg font-bold text-gray-700 mb-4">💭 Thoughts & Beliefs</h4>
+                <p class="mb-2 text-sm font-semibold text-gray-600">What thoughts or beliefs feel heavy or limiting?</p>
+                <textarea class="journal-input mb-4" rows="3" data-key="thoughts-stop" placeholder="What stories about yourself would you like to question?"></textarea>
+                <p class="mb-2 text-sm font-semibold text-gray-600">What would you like to believe about yourself and your life?</p>
+                <textarea class="journal-input" rows="3" data-key="thoughts-start" placeholder="What empowering beliefs would you like to cultivate?"></textarea>
+            </div>
+        </div>
+
+        <!-- Examples of Challenging Beliefs Section -->
+        <h2 class="text-2xl sm:text-3xl font-semibold text-gray-700 mt-16 mb-6 section-header">Exploring Inner Beliefs</h2>
+        <p class="text-gray-600 mb-6 leading-relaxed">
+            Sometimes the beliefs that shape our lives operate quietly in the background. This gentle exploration can help bring awareness to patterns that may be ready for transformation. Simply notice what resonates - we'll work with whatever comes up together.
+        </p>
+
+        <div class="space-y-8">
+            <div class="p-6 bg-[#f0e8e6] rounded-2xl border border-[#D1D5DB]">
+                <h3 class="text-xl font-bold text-gray-800 mb-4">💔 About Self-Worth</h3>
+                <p class="text-sm text-gray-600 mb-4 italic">Check any that feel familiar (even if they're not always present):</p>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-gray-700">
+                    <label class="flex items-center cursor-pointer hover:bg-white hover:bg-opacity-50 p-2 rounded transition-colors">
+                        <input type="checkbox" class="checkbox-custom" data-key="belief-no-love">I don't deserve love
+                    </label>
+                    <label class="flex items-center cursor-pointer hover:bg-white hover:bg-opacity-50 p-2 rounded transition-colors">
+                        <input type="checkbox" class="checkbox-custom" data-key="belief-bad-person">I am a bad person
+                    </label>
+                    <label class="flex items-center cursor-pointer hover:bg-white hover:bg-opacity-50 p-2 rounded transition-colors">
+                        <input type="checkbox" class="checkbox-custom" data-key="belief-ugly">I am ugly (my body is hateful)
+                    </label>
+                    <label class="flex items-center cursor-pointer hover:bg-white hover:bg-opacity-50 p-2 rounded transition-colors">
+                        <input type="checkbox" class="checkbox-custom" data-key="belief-no-deserve">I don't deserve good things
+                    </label>
+                    <label class="flex items-center cursor-pointer hover:bg-white hover:bg-opacity-50 p-2 rounded transition-colors">
+                        <input type="checkbox" class="checkbox-custom" data-key="belief-terrible">I am terrible
+                    </label>
+                    <label class="flex items-center cursor-pointer hover:bg-white hover:bg-opacity-50 p-2 rounded transition-colors">
+                        <input type="checkbox" class="checkbox-custom" data-key="belief-stupid">I am stupid (not smart enough)
+                    </label>
+                    <label class="flex items-center cursor-pointer hover:bg-white hover:bg-opacity-50 p-2 rounded transition-colors">
+                        <input type="checkbox" class="checkbox-custom" data-key="belief-worthless">I am worthless (inadequate)
+                    </label>
+                    <label class="flex items-center cursor-pointer hover:bg-white hover:bg-opacity-50 p-2 rounded transition-colors">
+                        <input type="checkbox" class="checkbox-custom" data-key="belief-insignificant">I am insignificant (unimportant)
+                    </label>
+                    <label class="flex items-center cursor-pointer hover:bg-white hover:bg-opacity-50 p-2 rounded transition-colors">
+                        <input type="checkbox" class="checkbox-custom" data-key="belief-shameful">I am shameful
+                    </label>
+                    <label class="flex items-center cursor-pointer hover:bg-white hover:bg-opacity-50 p-2 rounded transition-colors">
+                        <input type="checkbox" class="checkbox-custom" data-key="belief-disappointment">I am a disappointment
+                    </label>
+                    <label class="flex items-center cursor-pointer hover:bg-white hover:bg-opacity-50 p-2 rounded transition-colors">
+                        <input type="checkbox" class="checkbox-custom" data-key="belief-not-lovable">I am not lovable
+                    </label>
+                    <label class="flex items-center cursor-pointer hover:bg-white hover:bg-opacity-50 p-2 rounded transition-colors">
+                        <input type="checkbox" class="checkbox-custom" data-key="belief-not-good-enough">I am not good enough
+                    </label>
+                    <label class="flex items-center cursor-pointer hover:bg-white hover:bg-opacity-50 p-2 rounded transition-colors">
+                        <input type="checkbox" class="checkbox-custom" data-key="belief-deserve-die">I deserve to die
+                    </label>
+                    <label class="flex items-center cursor-pointer hover:bg-white hover:bg-opacity-50 p-2 rounded transition-colors">
+                        <input type="checkbox" class="checkbox-custom" data-key="belief-deserve-misery">I deserve to be miserable
+                    </label>
+                    <label class="flex items-center cursor-pointer hover:bg-white hover:bg-opacity-50 p-2 rounded transition-colors">
+                        <input type="checkbox" class="checkbox-custom" data-key="belief-deserve-bad">I deserve only bad things
+                    </label>
+                    <label class="flex items-center cursor-pointer hover:bg-white hover:bg-opacity-50 p-2 rounded transition-colors">
+                        <input type="checkbox" class="checkbox-custom" data-key="belief-different">I am different (don't belong)
+                    </label>
+                    <label class="flex items-center cursor-pointer hover:bg-white hover:bg-opacity-50 p-2 rounded transition-colors">
+                        <input type="checkbox" class="checkbox-custom" data-key="belief-damaged">I am permanently damaged
+                    </label>
+                </div>
+            </div>
+            
+            <div class="p-6 bg-[#f0e8e6] rounded-2xl border border-[#D1D5DB]">
+                <h3 class="text-xl font-bold text-gray-800 mb-4">⚖️ About Responsibility & Blame</h3>
+                <p class="text-sm text-gray-600 mb-4 italic">Sometimes we carry burdens that aren't ours to carry:</p>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-gray-700">
+                    <label class="flex items-center cursor-pointer hover:bg-white hover:bg-opacity-50 p-2 rounded transition-colors">
+                        <input type="checkbox" class="checkbox-custom" data-key="blame-should-have-done">I should have done something
+                    </label>
+                    <label class="flex items-center cursor-pointer hover:bg-white hover:bg-opacity-50 p-2 rounded transition-colors">
+                        <input type="checkbox" class="checkbox-custom" data-key="blame-should-have-known">I should have known better
+                    </label>
+                    <label class="flex items-center cursor-pointer hover:bg-white hover:bg-opacity-50 p-2 rounded transition-colors">
+                        <input type="checkbox" class="checkbox-custom" data-key="blame-did-wrong">I did something wrong
+                    </label>
+                </div>
+            </div>
+            
+            <div class="p-6 bg-[#f0e8e6] rounded-2xl border border-[#D1D5DB]">
+                <h3 class="text-xl font-bold text-gray-800 mb-4">🛡️ About Safety & Trust</h3>
+                <p class="text-sm text-gray-600 mb-4 italic">Our sense of safety shapes so much of how we move through the world:</p>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-gray-700">
+                    <label class="flex items-center cursor-pointer hover:bg-white hover:bg-opacity-50 p-2 rounded transition-colors">
+                        <input type="checkbox" class="checkbox-custom" data-key="safety-cannot-be-trusted">I cannot be trusted
+                    </label>
+                    <label class="flex items-center cursor-pointer hover:bg-white hover:bg-opacity-50 p-2 rounded transition-colors">
+                        <input type="checkbox" class="checkbox-custom" data-key="safety-cannot-trust-self">I cannot trust myself
+                    </label>
+                    <label class="flex items-center cursor-pointer hover:bg-white hover:bg-opacity-50 p-2 rounded transition-colors">
+                        <input type="checkbox" class="checkbox-custom" data-key="safety-cannot-trust-judgment">I cannot trust my judgment
+                    </label>
+                    <label class="flex items-center cursor-pointer hover:bg-white hover:bg-opacity-50 p-2 rounded transition-colors">
+                        <input type="checkbox" class="checkbox-custom" data-key="safety-in-danger">I am in danger
+                    </label>
+                    <label class="flex items-center cursor-pointer hover:bg-white hover:bg-opacity-50 p-2 rounded transition-colors">
+                        <input type="checkbox" class="checkbox-custom" data-key="safety-no-emotions">It's not OK to feel (show) my emotions
+                    </label>
+                    <label class="flex items-center cursor-pointer hover:bg-white hover:bg-opacity-50 p-2 rounded transition-colors">
+                        <input type="checkbox" class="checkbox-custom" data-key="safety-trust-no-one">I cannot trust anyone
+                    </label>
+                    <label class="flex items-center cursor-pointer hover:bg-white hover:bg-opacity-50 p-2 rounded transition-colors">
+                        <input type="checkbox" class="checkbox-custom" data-key="safety-cannot-protect">I cannot protect myself
+                    </label>
+                    <label class="flex items-center cursor-pointer hover:bg-white hover:bg-opacity-50 p-2 rounded transition-colors">
+                        <input type="checkbox" class="checkbox-custom" data-key="safety-cannot-stand-up">I cannot stand up for myself
+                    </label>
+                    <label class="flex items-center cursor-pointer hover:bg-white hover:bg-opacity-50 p-2 rounded transition-colors">
+                        <input type="checkbox" class="checkbox-custom" data-key="safety-cannot-let-out">I cannot let it out
+                    </label>
+                </div>
+            </div>
+            
+            <div class="p-6 bg-[#f0e8e6] rounded-2xl border border-[#D1D5DB]">
+                <h3 class="text-xl font-bold text-gray-800 mb-4">💪 About Personal Power & Control</h3>
+                <p class="text-sm text-gray-600 mb-4 italic">How we see our own agency and capabilities:</p>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-gray-700">
+                    <label class="flex items-center cursor-pointer hover:bg-white hover:bg-opacity-50 p-2 rounded transition-colors">
+                        <input type="checkbox" class="checkbox-custom" data-key="control-not-in-control">I am not in control
+                    </label>
+                    <label class="flex items-center cursor-pointer hover:bg-white hover:bg-opacity-50 p-2 rounded transition-colors">
+                        <input type="checkbox" class="checkbox-custom" data-key="control-cannot-do">I cannot do (what I need to do)
+                    </label>
+                    <label class="flex items-center cursor-pointer hover:bg-white hover:bg-opacity-50 p-2 rounded transition-colors">
+                        <input type="checkbox" class="checkbox-custom" data-key="control-powerless">I am powerless (helpless)
+                    </label>
+                    <label class="flex items-center cursor-pointer hover:bg-white hover:bg-opacity-50 p-2 rounded transition-colors">
+                        <input type="checkbox" class="checkbox-custom" data-key="control-weak">I am weak
+                    </label>
+                    <label class="flex items-center cursor-pointer hover:bg-white hover:bg-opacity-50 p-2 rounded transition-colors">
+                        <input type="checkbox" class="checkbox-custom" data-key="control-cannot-get-want">I cannot get what I want
+                    </label>
+                    <label class="flex items-center cursor-pointer hover:bg-white hover:bg-opacity-50 p-2 rounded transition-colors">
+                        <input type="checkbox" class="checkbox-custom" data-key="control-cannot-succeed">I cannot succeed
+                    </label>
+                    <label class="flex items-center cursor-pointer hover:bg-white hover:bg-opacity-50 p-2 rounded transition-colors">
+                        <input type="checkbox" class="checkbox-custom" data-key="control-be-perfect">I have to be perfect (please everyone)
+                    </label>
+                    <label class="flex items-center cursor-pointer hover:bg-white hover:bg-opacity-50 p-2 rounded transition-colors">
+                        <input type="checkbox" class="checkbox-custom" data-key="control-cannot-stand-it">I cannot stand it
+                    </label>
+                    <label class="flex items-center cursor-pointer hover:bg-white hover:bg-opacity-50 p-2 rounded transition-colors">
+                        <input type="checkbox" class="checkbox-custom" data-key="control-failure">I am a failure (will fail)
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <!-- Additional Reflection Space -->
+        <div class="journal-box mt-12">
+            <h4 class="text-lg font-bold text-gray-700 mb-4">🌱 Additional Reflections</h4>
+            <p class="mb-2 text-sm font-semibold text-gray-600">Is there anything else coming up for you as you explore these areas? Any insights, questions, or feelings you'd like to capture?</p>
+            <textarea class="journal-input" rows="4" data-key="additional-reflections" placeholder="This space is for whatever feels important to you right now..."></textarea>
+        </div>
+
+        <!-- Closing Remarks -->
+        <div class="gentle-reminder rounded-xl p-6 mt-12 text-center">
+            <p class="text-gray-700 text-lg mb-3">
+                🌟 <strong>You've taken a brave step today</strong> by looking at these tender parts of yourself.
+            </p>
+            <p class="text-gray-600 leading-relaxed">
+                Remember that this exploration is a guide, not a test. These beliefs developed as protective mechanisms, and with compassion and time, we can help them transform. The willingness to look at them with curiosity rather than judgment is where healing begins.
+            </p>
+            <p class="text-gray-500 text-sm mt-4 italic">
+                Your responses have been automatically saved. Take your time with this process - healing happens at its own pace.
+            </p>
+        </div>
+
+    </div>
+
+    <script>
+        // Auto-save functionality
+        let saveTimeout;
+        
+        function showSaveIndicator(status, message) {
+            const indicator = document.getElementById('saveIndicator');
+            const text = document.getElementById('saveText');
+            
+            indicator.classList.remove('saving', 'saved', 'error', 'success');
+            indicator.classList.add('show', status);
+            
+            if (message) {
+                text.textContent = message;
+            } else {
+                switch(status) {
+                    case 'saving':
+                        text.textContent = 'Auto-saving...';
+                        break;
+                    case 'saved':
+                        text.textContent = '✓ Saved';
+                        break;
+                    case 'success':
+                        text.textContent = '✓ Success!';
+                        break;
+                    case 'error':
+                        text.textContent = '⚠ Error';
+                        break;
+                }
+            }
+            
+            // Hide after 2 seconds if saved/success
+            if (status === 'saved' || status === 'success') {
+                setTimeout(() => {
+                    indicator.classList.remove('show');
+                }, 2000);
+            } else if (status === 'error') {
+                setTimeout(() => {
+                    indicator.classList.remove('show');
+                }, 4000);
+            }
+        }
+        
+        function saveData(key, value) {
+            try {
+                localStorage.setItem(`emdr_goals_${key}`, value);
+                showSaveIndicator('saved');
+            } catch (e) {
+                console.error('Error saving data:', e);
+                showSaveIndicator('error');
+            }
+        }
+        
+        function loadData() {
+            // Load text areas
+            document.querySelectorAll('textarea[data-key]').forEach(textarea => {
+                const key = textarea.getAttribute('data-key');
+                const savedValue = localStorage.getItem(`emdr_goals_${key}`);
+                if (savedValue) {
+                    textarea.value = savedValue;
+                }
+            });
+            
+            // Load checkboxes
+            document.querySelectorAll('input[type="checkbox"][data-key]').forEach(checkbox => {
+                const key = checkbox.getAttribute('data-key');
+                const savedValue = localStorage.getItem(`emdr_goals_${key}`);
+                if (savedValue === 'true') {
+                    checkbox.checked = true;
+                }
+            });
+        }
+        
+        function setupAutoSave() {
+            // Text areas
+            document.querySelectorAll('textarea[data-key]').forEach(textarea => {
+                textarea.addEventListener('input', function() {
+                    clearTimeout(saveTimeout);
+                    showSaveIndicator('saving');
+                    
+                    saveTimeout = setTimeout(() => {
+                        const key = this.getAttribute('data-key');
+                        saveData(key, this.value);
+                    }, 1000);
+                });
+            });
+            
+            // Checkboxes
+            document.querySelectorAll('input[type="checkbox"][data-key]').forEach(checkbox => {
+                checkbox.addEventListener('change', function() {
+                    const key = this.getAttribute('data-key');
+                    saveData(key, this.checked.toString());
+                });
+            });
+        }
+        
+        // --- SHARE FUNCTIONALITY ---
+        
+        function collectAllData() {
+            const data = {
+                textFields: {},
+                checkboxes: {},
+                checkedBeliefs: []
+            };
+            
+            // Collect text area data directly from form elements (not localStorage)
+            document.querySelectorAll('textarea[data-key]').forEach(textarea => {
+                const key = textarea.getAttribute('data-key');
+                const value = textarea.value.trim();
+                if (value) {
+                    data.textFields[key] = value;
+                }
+            });
+            
+            // Collect checkbox data directly from form elements (not localStorage)
+            document.querySelectorAll('input[type="checkbox"][data-key]').forEach(checkbox => {
+                const key = checkbox.getAttribute('data-key');
+                if (checkbox.checked) {
+                    const labelText = checkbox.parentNode.textContent.trim();
+                    data.checkedBeliefs.push(labelText);
+                    data.checkboxes[key] = true;
+                }
+            });
+            
+            return data;
+        }
+        
+        function formatDataForSharing() {
+            const data = collectAllData();
+            const now = new Date();
+            const dateStr = now.toLocaleDateString('en-US', { 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric' 
+            });
+            
+            let shareText = `EMDR Goals & Beliefs Workbook - ${dateStr}\n`;
+            shareText += `Generated from session with Janice LaFountaine, MS, LMFT\n`;
+            shareText += `${'='.repeat(60)}\n\n`;
+            
+            // What I'd Like to Transform
+            const hasTransformContent = data.textFields['behavior-stop'] || data.textFields['behavior-start'] || 
+                                       data.textFields['emotions-stop'] || data.textFields['emotions-start'] ||
+                                       data.textFields['sensations-stop'] || data.textFields['sensations-start'] ||
+                                       data.textFields['thoughts-stop'] || data.textFields['thoughts-start'];
+            
+            if (hasTransformContent) {
+                shareText += `WHAT I'D LIKE TO TRANSFORM\n${'-'.repeat(35)}\n\n`;
+                
+                if (data.textFields['behavior-stop'] || data.textFields['behavior-start']) {
+                    shareText += `BEHAVIORS & ACTIONS:\n`;
+                    if (data.textFields['behavior-stop']) {
+                        shareText += `• What no longer serves me: ${data.textFields['behavior-stop']}\n`;
+                    }
+                    if (data.textFields['behavior-start']) {
+                        shareText += `• What I'd like to do more of: ${data.textFields['behavior-start']}\n`;
+                    }
+                    shareText += '\n';
+                }
+                
+                if (data.textFields['emotions-stop'] || data.textFields['emotions-start']) {
+                    shareText += `EMOTIONS & FEELINGS:\n`;
+                    if (data.textFields['emotions-stop']) {
+                        shareText += `• Overwhelming emotions: ${data.textFields['emotions-stop']}\n`;
+                    }
+                    if (data.textFields['emotions-start']) {
+                        shareText += `• Emotions I'd like more of: ${data.textFields['emotions-start']}\n`;
+                    }
+                    shareText += '\n';
+                }
+                
+                if (data.textFields['sensations-stop'] || data.textFields['sensations-start']) {
+                    shareText += `BODY & SENSATIONS:\n`;
+                    if (data.textFields['sensations-stop']) {
+                        shareText += `• Uncomfortable sensations: ${data.textFields['sensations-stop']}\n`;
+                    }
+                    if (data.textFields['sensations-start']) {
+                        shareText += `• How I'd like to feel: ${data.textFields['sensations-start']}\n`;
+                    }
+                    shareText += '\n';
+                }
+                
+                if (data.textFields['thoughts-stop'] || data.textFields['thoughts-start']) {
+                    shareText += `THOUGHTS & BELIEFS:\n`;
+                    if (data.textFields['thoughts-stop']) {
+                        shareText += `• Limiting beliefs: ${data.textFields['thoughts-stop']}\n`;
+                    }
+                    if (data.textFields['thoughts-start']) {
+                        shareText += `• Empowering beliefs I'd like: ${data.textFields['thoughts-start']}\n`;
+                    }
+                    shareText += '\n';
+                }
+            }
+            
+            // Exploring Inner Beliefs
+            if (data.checkedBeliefs.length > 0) {
+                shareText += `EXPLORING INNER BELIEFS\n${'-'.repeat(35)}\n\n`;
+                shareText += `Beliefs that resonated with me:\n`;
+                data.checkedBeliefs.forEach(belief => {
+                    shareText += `• ${belief}\n`;
+                });
+                shareText += '\n';
+            }
+            
+            // Additional Reflections
+            if (data.textFields['additional-reflections']) {
+                shareText += `ADDITIONAL REFLECTIONS:\n${data.textFields['additional-reflections']}\n\n`;
+            }
+            
+            // Add note if no content
+            if (!hasTransformContent && data.checkedBeliefs.length === 0 && !data.textFields['additional-reflections']) {
+                shareText += `No responses have been recorded yet.\n\n`;
+            }
+            
+            shareText += `Generated with the EMDR Goals & Beliefs Workbook\nCreated by Janice LaFountaine, MS, LMFT`;
+            
+            return shareText;
+        }
+        
+        function openShareModal() {
+            const modal = document.getElementById('shareModal');
+            
+            // Check if Web Share API is available
+            const webShareOption = document.getElementById('webShareOption');
+            if (navigator.share) {
+                webShareOption.style.display = 'block';
+            } else {
+                webShareOption.style.display = 'none';
+            }
+            
+            modal.classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeShareModal() {
+            const modal = document.getElementById('shareModal');
+            modal.classList.remove('show');
+            document.body.style.overflow = 'auto';
+        }
+        
+        function shareViaEmail() {
+            try {
+                const shareText = formatDataForSharing();
+                const subject = encodeURIComponent('My EMDR Goals & Beliefs Workbook');
+                const body = encodeURIComponent(shareText);
+                const mailtoLink = `mailto:?subject=${subject}&body=${body}`;
+                
+                window.location.href = mailtoLink;
+                closeShareModal();
+                showSaveIndicator('success', '✓ Email opened');
+            } catch (error) {
+                console.error('Error sharing via email:', error);
+                showSaveIndicator('error', '⚠ Email error');
+            }
+        }
+        
+        async function copyToClipboard() {
+            try {
+                const shareText = formatDataForSharing();
+                
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                    await navigator.clipboard.writeText(shareText);
+                } else {
+                    // Fallback for older browsers
+                    const textArea = document.createElement('textarea');
+                    textArea.value = shareText;
+                    textArea.style.position = 'fixed';
+                    textArea.style.left = '-999999px';
+                    textArea.style.top = '-999999px';
+                    document.body.appendChild(textArea);
+                    textArea.focus();
+                    textArea.select();
+                    document.execCommand('copy');
+                    textArea.remove();
+                }
+                
+                closeShareModal();
+                showSaveIndicator('success', '✓ Copied to clipboard');
+            } catch (error) {
+                console.error('Error copying to clipboard:', error);
+                showSaveIndicator('error', '⚠ Copy failed');
+            }
+        }
+        
+        async function shareViaWebAPI() {
+            try {
+                if (!navigator.share) {
+                    throw new Error('Web Share API not supported');
+                }
+                
+                const shareText = formatDataForSharing();
+                
+                await navigator.share({
+                    title: 'My EMDR Goals & Beliefs Workbook',
+                    text: shareText,
+                });
+                
+                closeShareModal();
+                showSaveIndicator('success', '✓ Shared successfully');
+            } catch (error) {
+                if (error.name !== 'AbortError') {
+                    console.error('Error sharing via Web API:', error);
+                    showSaveIndicator('error', '⚠ Share failed');
+                }
+                // Don't show error for user cancellation
+            }
+        }
+        
+        function downloadFile() {
+            try {
+                const shareText = formatDataForSharing();
+                const now = new Date();
+                const dateStr = now.toLocaleDateString('en-US', { 
+                    year: 'numeric', 
+                    month: '2-digit', 
+                    day: '2-digit' 
+                }).replace(/\//g, '-');
+                
+                const blob = new Blob([shareText], { type: 'text/plain;charset=utf-8' });
+                const link = document.createElement('a');
+                link.href = URL.createObjectURL(blob);
+                link.download = `EMDR_Goals_Beliefs_${dateStr}.txt`;
+                link.click();
+                
+                URL.revokeObjectURL(link.href);
+                closeShareModal();
+                showSaveIndicator('success', '✓ File downloaded');
+            } catch (error) {
+                console.error('Error downloading file:', error);
+                showSaveIndicator('error', '⚠ Download failed');
+            }
+        }
+        
+        // --- EXISTING EXPORT AND CLEAR FUNCTIONS ---
+        
+        function exportData() {
+            // Use the same data collection method as share
+            const data = collectAllData();
+            const now = new Date();
+            const dateStr = now.toLocaleDateString('en-US', { 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric' 
+            });
+            
+            let exportText = `EMDR Goals & Beliefs Workbook - ${dateStr}\n`;
+            exportText += `Generated from session with Janice LaFountaine, MS, LMFT\n`;
+            exportText += `${'='.repeat(60)}\n\n`;
+            
+            // What I'd Like to Transform
+            const hasTransformContent = data.textFields['behavior-stop'] || data.textFields['behavior-start'] || 
+                                       data.textFields['emotions-stop'] || data.textFields['emotions-start'] ||
+                                       data.textFields['sensations-stop'] || data.textFields['sensations-start'] ||
+                                       data.textFields['thoughts-stop'] || data.textFields['thoughts-start'];
+            
+            if (hasTransformContent) {
+                exportText += `WHAT I'D LIKE TO TRANSFORM\n${'-'.repeat(35)}\n\n`;
+                
+                if (data.textFields['behavior-stop'] || data.textFields['behavior-start']) {
+                    exportText += `BEHAVIORS & ACTIONS:\n`;
+                    if (data.textFields['behavior-stop']) {
+                        exportText += `• What no longer serves me: ${data.textFields['behavior-stop']}\n`;
+                    }
+                    if (data.textFields['behavior-start']) {
+                        exportText += `• What I'd like to do more of: ${data.textFields['behavior-start']}\n`;
+                    }
+                    exportText += '\n';
+                }
+                
+                if (data.textFields['emotions-stop'] || data.textFields['emotions-start']) {
+                    exportText += `EMOTIONS & FEELINGS:\n`;
+                    if (data.textFields['emotions-stop']) {
+                        exportText += `• Overwhelming emotions: ${data.textFields['emotions-stop']}\n`;
+                    }
+                    if (data.textFields['emotions-start']) {
+                        exportText += `• Emotions I'd like more of: ${data.textFields['emotions-start']}\n`;
+                    }
+                    exportText += '\n';
+                }
+                
+                if (data.textFields['sensations-stop'] || data.textFields['sensations-start']) {
+                    exportText += `BODY & SENSATIONS:\n`;
+                    if (data.textFields['sensations-stop']) {
+                        exportText += `• Uncomfortable sensations: ${data.textFields['sensations-stop']}\n`;
+                    }
+                    if (data.textFields['sensations-start']) {
+                        exportText += `• How I'd like to feel: ${data.textFields['sensations-start']}\n`;
+                    }
+                    exportText += '\n';
+                }
+                
+                if (data.textFields['thoughts-stop'] || data.textFields['thoughts-start']) {
+                    exportText += `THOUGHTS & BELIEFS:\n`;
+                    if (data.textFields['thoughts-stop']) {
+                        exportText += `• Limiting beliefs: ${data.textFields['thoughts-stop']}\n`;
+                    }
+                    if (data.textFields['thoughts-start']) {
+                        exportText += `• Empowering beliefs I'd like: ${data.textFields['thoughts-start']}\n`;
+                    }
+                    exportText += '\n';
+                }
+            }
+            
+            // Exploring Inner Beliefs
+            if (data.checkedBeliefs.length > 0) {
+                exportText += `EXPLORING INNER BELIEFS\n${'-'.repeat(35)}\n\n`;
+                exportText += `Beliefs that resonated with me:\n`;
+                data.checkedBeliefs.forEach(belief => {
+                    exportText += `• ${belief}\n`;
+                });
+                exportText += '\n';
+            }
+            
+            // Additional Reflections
+            if (data.textFields['additional-reflections']) {
+                exportText += `ADDITIONAL REFLECTIONS:\n${data.textFields['additional-reflections']}\n\n`;
+            }
+            
+            // Add note if no content
+            if (!hasTransformContent && data.checkedBeliefs.length === 0 && !data.textFields['additional-reflections']) {
+                exportText += `No responses have been recorded yet.\n\n`;
+            }
+            
+            exportText += `Generated with the EMDR Goals & Beliefs Workbook\nCreated by Janice LaFountaine, MS, LMFT`;
+            
+            // Create a Blob from the text and a link to download it
+            const blob = new Blob([exportText], { type: 'text/plain;charset=utf-8' });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            const downloadDateStr = now.toLocaleDateString('en-US', { 
+                year: 'numeric', 
+                month: '2-digit', 
+                day: '2-digit' 
+            }).replace(/\//g, '-');
+            link.download = `EMDR_Goals_Beliefs_${downloadDateStr}.txt`;
+            link.click();
+            
+            // Cleanup the URL object
+            URL.revokeObjectURL(link.href);
+        }
+        
+        function clearData() {
+            // Confirm with the user
+            const confirmed = confirm("Are you sure you want to clear ALL your responses? This action cannot be undone.");
+            if (!confirmed) {
+                return;
+            }
+            
+            // Clear all text areas
+            document.querySelectorAll('textarea[data-key]').forEach(textarea => {
+                textarea.value = '';
+                localStorage.removeItem(`emdr_goals_${textarea.getAttribute('data-key')}`);
+            });
+            
+            // Uncheck all checkboxes
+            document.querySelectorAll('input[type="checkbox"][data-key]').forEach(checkbox => {
+                checkbox.checked = false;
+                localStorage.removeItem(`emdr_goals_${checkbox.getAttribute('data-key')}`);
+            });
+            
+            alert("All responses have been cleared.");
+            showSaveIndicator('saved');
+        }
+
+        // Event listeners
+        document.addEventListener('DOMContentLoaded', () => {
+            loadData();
+            setupAutoSave();
+            
+            // Existing button events
+            document.getElementById('exportBtn').addEventListener('click', exportData);
+            document.getElementById('printBtn').addEventListener('click', () => window.print());
+            document.getElementById('clearBtn').addEventListener('click', clearData);
+            
+            // New share button event
+            document.getElementById('shareBtn').addEventListener('click', openShareModal);
+            
+            // Close modal when clicking backdrop
+            document.getElementById('shareModal').addEventListener('click', (e) => {
+                if (e.target === e.currentTarget) {
+                    closeShareModal();
+                }
+            });
+            
+            // Escape key to close modal
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && document.getElementById('shareModal').classList.contains('show')) {
+                    closeShareModal();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
