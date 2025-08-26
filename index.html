@@ -79,6 +79,14 @@
             background-color: #D1FAE5;
             color: #065F46;
         }
+        .save-indicator.error {
+            background-color: #FEE2E2;
+            color: #991B1B;
+        }
+        .save-indicator.success {
+            background-color: #D1FAE5;
+            color: #065F46;
+        }
         .btn {
             transition: all 0.2s ease;
             font-weight: 500;
@@ -113,6 +121,80 @@
             background: linear-gradient(135deg, #f0e8e6 0%, #f4f0ed 100%);
             border: 1px solid #e5e7eb;
         }
+        
+        /* Share Modal Styles */
+        .share-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        .share-modal.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        .share-modal-content {
+            background: white;
+            border-radius: 1rem;
+            padding: 2rem;
+            max-width: 500px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+        }
+        .share-modal.show .share-modal-content {
+            transform: scale(1);
+        }
+        .share-option {
+            border: 1px solid #e5e7eb;
+            border-radius: 0.75rem;
+            padding: 1rem;
+            margin-bottom: 0.75rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .share-option:hover {
+            background-color: #f9fafb;
+            border-color: #d1d5db;
+            transform: translateY(-1px);
+        }
+        .share-option-icon {
+            font-size: 1.5rem;
+            width: 2.5rem;
+            text-align: center;
+        }
+        .close-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #6b7280;
+            padding: 0.25rem;
+            border-radius: 50%;
+            transition: background-color 0.2s ease;
+        }
+        .close-modal:hover {
+            background-color: #f3f4f6;
+            color: #374151;
+        }
     </style>
 </head>
 <body class="p-4 sm:p-8">
@@ -122,11 +204,63 @@
         <span id="saveText">Auto-saving...</span>
     </div>
 
+    <!-- Share Modal -->
+    <div id="shareModal" class="share-modal">
+        <div class="share-modal-content">
+            <button class="close-modal" onclick="closeShareModal()">&times;</button>
+            <h3 class="text-xl font-bold text-gray-800 mb-4">Share Your Responses</h3>
+            <p class="text-gray-600 text-sm mb-6">Choose how you'd like to share your EMDR goals and beliefs workbook:</p>
+            
+            <div id="shareOptions">
+                <div class="share-option" onclick="shareViaEmail()">
+                    <div class="share-option-icon">📧</div>
+                    <div>
+                        <div class="font-semibold text-gray-800">Email</div>
+                        <div class="text-sm text-gray-600">Open your email client with pre-filled content</div>
+                    </div>
+                </div>
+                
+                <div class="share-option" onclick="copyToClipboard()">
+                    <div class="share-option-icon">📋</div>
+                    <div>
+                        <div class="font-semibold text-gray-800">Copy to Clipboard</div>
+                        <div class="text-sm text-gray-600">Copy formatted text to paste elsewhere</div>
+                    </div>
+                </div>
+                
+                <div id="webShareOption" class="share-option" onclick="shareViaWebAPI()" style="display: none;">
+                    <div class="share-option-icon">🔗</div>
+                    <div>
+                        <div class="font-semibold text-gray-800">Share</div>
+                        <div class="text-sm text-gray-600">Use your device's built-in sharing options</div>
+                    </div>
+                </div>
+                
+                <div class="share-option" onclick="downloadFile()">
+                    <div class="share-option-icon">💾</div>
+                    <div>
+                        <div class="font-semibold text-gray-800">Download File</div>
+                        <div class="text-sm text-gray-600">Save as a text file to your device</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-6 p-3 bg-yellow-50 border border-yellow-200 rounded-lg">
+                <p class="text-sm text-yellow-800">
+                    <strong>Privacy Reminder:</strong> Please be thoughtful about sharing personal information. Consider who will have access to your responses and choose secure sharing methods when appropriate.
+                </p>
+            </div>
+        </div>
+    </div>
+
     <!-- Main Container -->
     <div class="max-w-4xl mx-auto bg-white p-6 sm:p-10 rounded-3xl shadow-2xl border border-gray-100">
 
         <!-- Action Buttons -->
         <div class="no-print flex flex-wrap gap-3 mb-6 justify-center sm:justify-end">
+            <button id="shareBtn" class="btn bg-purple-100 hover:bg-purple-200 text-purple-800 px-4 py-2 rounded-lg">
+                🔗 Share
+            </button>
             <button id="exportBtn" class="btn bg-blue-100 hover:bg-blue-200 text-blue-800 px-4 py-2 rounded-lg">
                 📄 Export Responses
             </button>
@@ -371,24 +505,41 @@
         // Auto-save functionality
         let saveTimeout;
         
-        function showSaveIndicator(status) {
+        function showSaveIndicator(status, message) {
             const indicator = document.getElementById('saveIndicator');
             const text = document.getElementById('saveText');
             
-            indicator.classList.remove('saving', 'saved');
+            indicator.classList.remove('saving', 'saved', 'error', 'success');
             indicator.classList.add('show', status);
             
-            if (status === 'saving') {
-                text.textContent = 'Auto-saving...';
-            } else if (status === 'saved') {
-                text.textContent = '✓ Saved';
+            if (message) {
+                text.textContent = message;
+            } else {
+                switch(status) {
+                    case 'saving':
+                        text.textContent = 'Auto-saving...';
+                        break;
+                    case 'saved':
+                        text.textContent = '✓ Saved';
+                        break;
+                    case 'success':
+                        text.textContent = '✓ Success!';
+                        break;
+                    case 'error':
+                        text.textContent = '⚠ Error';
+                        break;
+                }
             }
             
-            // Hide after 2 seconds if saved
-            if (status === 'saved') {
+            // Hide after 2 seconds if saved/success
+            if (status === 'saved' || status === 'success') {
                 setTimeout(() => {
                     indicator.classList.remove('show');
                 }, 2000);
+            } else if (status === 'error') {
+                setTimeout(() => {
+                    indicator.classList.remove('show');
+                }, 4000);
             }
         }
         
@@ -398,6 +549,7 @@
                 showSaveIndicator('saved');
             } catch (e) {
                 console.error('Error saving data:', e);
+                showSaveIndicator('error');
             }
         }
         
@@ -444,10 +596,248 @@
             });
         }
         
-        // --- NEW AND REPAIRED FUNCTIONS BELOW ---
+        // --- SHARE FUNCTIONALITY ---
         
-        // Function to create a clean text file for export
+        function collectAllData() {
+            const data = {
+                textFields: {},
+                checkboxes: {},
+                checkedBeliefs: []
+            };
+            
+            // Collect text area data directly from form elements (not localStorage)
+            document.querySelectorAll('textarea[data-key]').forEach(textarea => {
+                const key = textarea.getAttribute('data-key');
+                const value = textarea.value.trim();
+                if (value) {
+                    data.textFields[key] = value;
+                }
+            });
+            
+            // Collect checkbox data directly from form elements (not localStorage)
+            document.querySelectorAll('input[type="checkbox"][data-key]').forEach(checkbox => {
+                const key = checkbox.getAttribute('data-key');
+                if (checkbox.checked) {
+                    const labelText = checkbox.parentNode.textContent.trim();
+                    data.checkedBeliefs.push(labelText);
+                    data.checkboxes[key] = true;
+                }
+            });
+            
+            return data;
+        }
+        
+        function formatDataForSharing() {
+            const data = collectAllData();
+            const now = new Date();
+            const dateStr = now.toLocaleDateString('en-US', { 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric' 
+            });
+            
+            let shareText = `EMDR Goals & Beliefs Workbook - ${dateStr}\n`;
+            shareText += `Generated from session with Janice LaFountaine, MS, LMFT\n`;
+            shareText += `${'='.repeat(60)}\n\n`;
+            
+            // What I'd Like to Transform
+            const hasTransformContent = data.textFields['behavior-stop'] || data.textFields['behavior-start'] || 
+                                       data.textFields['emotions-stop'] || data.textFields['emotions-start'] ||
+                                       data.textFields['sensations-stop'] || data.textFields['sensations-start'] ||
+                                       data.textFields['thoughts-stop'] || data.textFields['thoughts-start'];
+            
+            if (hasTransformContent) {
+                shareText += `WHAT I'D LIKE TO TRANSFORM\n${'-'.repeat(35)}\n\n`;
+                
+                if (data.textFields['behavior-stop'] || data.textFields['behavior-start']) {
+                    shareText += `BEHAVIORS & ACTIONS:\n`;
+                    if (data.textFields['behavior-stop']) {
+                        shareText += `• What no longer serves me: ${data.textFields['behavior-stop']}\n`;
+                    }
+                    if (data.textFields['behavior-start']) {
+                        shareText += `• What I'd like to do more of: ${data.textFields['behavior-start']}\n`;
+                    }
+                    shareText += '\n';
+                }
+                
+                if (data.textFields['emotions-stop'] || data.textFields['emotions-start']) {
+                    shareText += `EMOTIONS & FEELINGS:\n`;
+                    if (data.textFields['emotions-stop']) {
+                        shareText += `• Overwhelming emotions: ${data.textFields['emotions-stop']}\n`;
+                    }
+                    if (data.textFields['emotions-start']) {
+                        shareText += `• Emotions I'd like more of: ${data.textFields['emotions-start']}\n`;
+                    }
+                    shareText += '\n';
+                }
+                
+                if (data.textFields['sensations-stop'] || data.textFields['sensations-start']) {
+                    shareText += `BODY & SENSATIONS:\n`;
+                    if (data.textFields['sensations-stop']) {
+                        shareText += `• Uncomfortable sensations: ${data.textFields['sensations-stop']}\n`;
+                    }
+                    if (data.textFields['sensations-start']) {
+                        shareText += `• How I'd like to feel: ${data.textFields['sensations-start']}\n`;
+                    }
+                    shareText += '\n';
+                }
+                
+                if (data.textFields['thoughts-stop'] || data.textFields['thoughts-start']) {
+                    shareText += `THOUGHTS & BELIEFS:\n`;
+                    if (data.textFields['thoughts-stop']) {
+                        shareText += `• Limiting beliefs: ${data.textFields['thoughts-stop']}\n`;
+                    }
+                    if (data.textFields['thoughts-start']) {
+                        shareText += `• Empowering beliefs I'd like: ${data.textFields['thoughts-start']}\n`;
+                    }
+                    shareText += '\n';
+                }
+            }
+            
+            // Exploring Inner Beliefs
+            if (data.checkedBeliefs.length > 0) {
+                shareText += `EXPLORING INNER BELIEFS\n${'-'.repeat(35)}\n\n`;
+                shareText += `Beliefs that resonated with me:\n`;
+                data.checkedBeliefs.forEach(belief => {
+                    shareText += `• ${belief}\n`;
+                });
+                shareText += '\n';
+            }
+            
+            // Additional Reflections
+            if (data.textFields['additional-reflections']) {
+                shareText += `ADDITIONAL REFLECTIONS:\n${data.textFields['additional-reflections']}\n\n`;
+            }
+            
+            // Add note if no content
+            if (!hasTransformContent && data.checkedBeliefs.length === 0 && !data.textFields['additional-reflections']) {
+                shareText += `No responses have been recorded yet.\n\n`;
+            }
+            
+            shareText += `Generated with the EMDR Goals & Beliefs Workbook\nCreated by Janice LaFountaine, MS, LMFT`;
+            
+            return shareText;
+        }
+        
+        function openShareModal() {
+            const modal = document.getElementById('shareModal');
+            
+            // Check if Web Share API is available
+            const webShareOption = document.getElementById('webShareOption');
+            if (navigator.share) {
+                webShareOption.style.display = 'block';
+            } else {
+                webShareOption.style.display = 'none';
+            }
+            
+            modal.classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeShareModal() {
+            const modal = document.getElementById('shareModal');
+            modal.classList.remove('show');
+            document.body.style.overflow = 'auto';
+        }
+        
+        function shareViaEmail() {
+            try {
+                const shareText = formatDataForSharing();
+                const subject = encodeURIComponent('My EMDR Goals & Beliefs Workbook');
+                const body = encodeURIComponent(shareText);
+                const mailtoLink = `mailto:?subject=${subject}&body=${body}`;
+                
+                window.location.href = mailtoLink;
+                closeShareModal();
+                showSaveIndicator('success', '✓ Email opened');
+            } catch (error) {
+                console.error('Error sharing via email:', error);
+                showSaveIndicator('error', '⚠ Email error');
+            }
+        }
+        
+        async function copyToClipboard() {
+            try {
+                const shareText = formatDataForSharing();
+                
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                    await navigator.clipboard.writeText(shareText);
+                } else {
+                    // Fallback for older browsers
+                    const textArea = document.createElement('textarea');
+                    textArea.value = shareText;
+                    textArea.style.position = 'fixed';
+                    textArea.style.left = '-999999px';
+                    textArea.style.top = '-999999px';
+                    document.body.appendChild(textArea);
+                    textArea.focus();
+                    textArea.select();
+                    document.execCommand('copy');
+                    textArea.remove();
+                }
+                
+                closeShareModal();
+                showSaveIndicator('success', '✓ Copied to clipboard');
+            } catch (error) {
+                console.error('Error copying to clipboard:', error);
+                showSaveIndicator('error', '⚠ Copy failed');
+            }
+        }
+        
+        async function shareViaWebAPI() {
+            try {
+                if (!navigator.share) {
+                    throw new Error('Web Share API not supported');
+                }
+                
+                const shareText = formatDataForSharing();
+                
+                await navigator.share({
+                    title: 'My EMDR Goals & Beliefs Workbook',
+                    text: shareText,
+                });
+                
+                closeShareModal();
+                showSaveIndicator('success', '✓ Shared successfully');
+            } catch (error) {
+                if (error.name !== 'AbortError') {
+                    console.error('Error sharing via Web API:', error);
+                    showSaveIndicator('error', '⚠ Share failed');
+                }
+                // Don't show error for user cancellation
+            }
+        }
+        
+        function downloadFile() {
+            try {
+                const shareText = formatDataForSharing();
+                const now = new Date();
+                const dateStr = now.toLocaleDateString('en-US', { 
+                    year: 'numeric', 
+                    month: '2-digit', 
+                    day: '2-digit' 
+                }).replace(/\//g, '-');
+                
+                const blob = new Blob([shareText], { type: 'text/plain;charset=utf-8' });
+                const link = document.createElement('a');
+                link.href = URL.createObjectURL(blob);
+                link.download = `EMDR_Goals_Beliefs_${dateStr}.txt`;
+                link.click();
+                
+                URL.revokeObjectURL(link.href);
+                closeShareModal();
+                showSaveIndicator('success', '✓ File downloaded');
+            } catch (error) {
+                console.error('Error downloading file:', error);
+                showSaveIndicator('error', '⚠ Download failed');
+            }
+        }
+        
+        // --- EXISTING EXPORT AND CLEAR FUNCTIONS ---
+        
         function exportData() {
+            // Use the same data collection method as share
+            const data = collectAllData();
             const now = new Date();
             const dateStr = now.toLocaleDateString('en-US', { 
                 year: 'numeric', 
@@ -460,60 +850,97 @@
             exportText += `${'='.repeat(60)}\n\n`;
             
             // What I'd Like to Transform
-            exportText += `WHAT I'D LIKE TO TRANSFORM\n${'-'.repeat(35)}\n\n`;
-            const behaviorStop = localStorage.getItem('emdr_goals_behavior-stop') || '';
-            const behaviorStart = localStorage.getItem('emdr_goals_behavior-start') || '';
-            const emotionsStop = localStorage.getItem('emdr_goals_emotions-stop') || '';
-            const emotionsStart = localStorage.getItem('emdr_goals_emotions-start') || '';
-            const sensationsStop = localStorage.getItem('emdr_goals_sensations-stop') || '';
-            const sensationsStart = localStorage.getItem('emdr_goals_sensations-start') || '';
-            const thoughtsStop = localStorage.getItem('emdr_goals_thoughts-stop') || '';
-            const thoughtsStart = localStorage.getItem('emdr_goals_thoughts-start') || '';
-            const additionalReflections = localStorage.getItem('emdr_goals_additional-reflections') || '';
-
-            if (behaviorStop) exportText += `BEHAVIORS & ACTIONS (No Longer Serving Me):\n${behaviorStop}\n\n`;
-            if (behaviorStart) exportText += `BEHAVIORS & ACTIONS (I'd Like to Do More Of):\n${behaviorStart}\n\n`;
-            if (emotionsStop) exportText += `EMOTIONS & FEELINGS (Overwhelming):\n${emotionsStop}\n\n`;
-            if (emotionsStart) exportText += `EMOTIONS & FEELINGS (I'd Like More Of):\n${emotionsStart}\n\n`;
-            if (sensationsStop) exportText += `BODY & SENSATIONS (Uncomfortable):\n${sensationsStop}\n\n`;
-            if (sensationsStart) exportText += `BODY & SENSATIONS (How I'd Like to Feel):\n${sensationsStart}\n\n`;
-            if (thoughtsStop) exportText += `THOUGHTS & BELIEFS (Limiting):\n${thoughtsStop}\n\n`;
-            if (thoughtsStart) exportText += `THOUGHTS & BELIEFS (Empowering):\n${thoughtsStart}\n\n`;
+            const hasTransformContent = data.textFields['behavior-stop'] || data.textFields['behavior-start'] || 
+                                       data.textFields['emotions-stop'] || data.textFields['emotions-start'] ||
+                                       data.textFields['sensations-stop'] || data.textFields['sensations-start'] ||
+                                       data.textFields['thoughts-stop'] || data.textFields['thoughts-start'];
+            
+            if (hasTransformContent) {
+                exportText += `WHAT I'D LIKE TO TRANSFORM\n${'-'.repeat(35)}\n\n`;
+                
+                if (data.textFields['behavior-stop'] || data.textFields['behavior-start']) {
+                    exportText += `BEHAVIORS & ACTIONS:\n`;
+                    if (data.textFields['behavior-stop']) {
+                        exportText += `• What no longer serves me: ${data.textFields['behavior-stop']}\n`;
+                    }
+                    if (data.textFields['behavior-start']) {
+                        exportText += `• What I'd like to do more of: ${data.textFields['behavior-start']}\n`;
+                    }
+                    exportText += '\n';
+                }
+                
+                if (data.textFields['emotions-stop'] || data.textFields['emotions-start']) {
+                    exportText += `EMOTIONS & FEELINGS:\n`;
+                    if (data.textFields['emotions-stop']) {
+                        exportText += `• Overwhelming emotions: ${data.textFields['emotions-stop']}\n`;
+                    }
+                    if (data.textFields['emotions-start']) {
+                        exportText += `• Emotions I'd like more of: ${data.textFields['emotions-start']}\n`;
+                    }
+                    exportText += '\n';
+                }
+                
+                if (data.textFields['sensations-stop'] || data.textFields['sensations-start']) {
+                    exportText += `BODY & SENSATIONS:\n`;
+                    if (data.textFields['sensations-stop']) {
+                        exportText += `• Uncomfortable sensations: ${data.textFields['sensations-stop']}\n`;
+                    }
+                    if (data.textFields['sensations-start']) {
+                        exportText += `• How I'd like to feel: ${data.textFields['sensations-start']}\n`;
+                    }
+                    exportText += '\n';
+                }
+                
+                if (data.textFields['thoughts-stop'] || data.textFields['thoughts-start']) {
+                    exportText += `THOUGHTS & BELIEFS:\n`;
+                    if (data.textFields['thoughts-stop']) {
+                        exportText += `• Limiting beliefs: ${data.textFields['thoughts-stop']}\n`;
+                    }
+                    if (data.textFields['thoughts-start']) {
+                        exportText += `• Empowering beliefs I'd like: ${data.textFields['thoughts-start']}\n`;
+                    }
+                    exportText += '\n';
+                }
+            }
             
             // Exploring Inner Beliefs
-            exportText += `EXPLORING INNER BELIEFS\n${'-'.repeat(35)}\n\n`;
-            const checkboxes = document.querySelectorAll('input[type="checkbox"][data-key]');
-            const checkedBeliefs = [];
-            checkboxes.forEach(checkbox => {
-                if (checkbox.checked) {
-                    checkedBeliefs.push(checkbox.parentNode.textContent.trim());
-                }
-            });
-
-            if (checkedBeliefs.length > 0) {
+            if (data.checkedBeliefs.length > 0) {
+                exportText += `EXPLORING INNER BELIEFS\n${'-'.repeat(35)}\n\n`;
                 exportText += `Beliefs that resonated with me:\n`;
-                checkedBeliefs.forEach(belief => {
-                    exportText += `- ${belief}\n`;
+                data.checkedBeliefs.forEach(belief => {
+                    exportText += `• ${belief}\n`;
                 });
                 exportText += '\n';
-            } else {
-                exportText += 'No specific beliefs were checked.\n\n';
             }
-
-            if (additionalReflections) exportText += `ADDITIONAL REFLECTIONS:\n${additionalReflections}\n\n`;
+            
+            // Additional Reflections
+            if (data.textFields['additional-reflections']) {
+                exportText += `ADDITIONAL REFLECTIONS:\n${data.textFields['additional-reflections']}\n\n`;
+            }
+            
+            // Add note if no content
+            if (!hasTransformContent && data.checkedBeliefs.length === 0 && !data.textFields['additional-reflections']) {
+                exportText += `No responses have been recorded yet.\n\n`;
+            }
+            
+            exportText += `Generated with the EMDR Goals & Beliefs Workbook\nCreated by Janice LaFountaine, MS, LMFT`;
             
             // Create a Blob from the text and a link to download it
             const blob = new Blob([exportText], { type: 'text/plain;charset=utf-8' });
             const link = document.createElement('a');
             link.href = URL.createObjectURL(blob);
-            link.download = `EMDR_Goals_Beliefs_${dateStr}.txt`;
+            const downloadDateStr = now.toLocaleDateString('en-US', { 
+                year: 'numeric', 
+                month: '2-digit', 
+                day: '2-digit' 
+            }).replace(/\//g, '-');
+            link.download = `EMDR_Goals_Beliefs_${downloadDateStr}.txt`;
             link.click();
             
             // Cleanup the URL object
             URL.revokeObjectURL(link.href);
         }
         
-        // Function to clear all form fields and local storage
         function clearData() {
             // Confirm with the user
             const confirmed = confirm("Are you sure you want to clear ALL your responses? This action cannot be undone.");
@@ -537,14 +964,32 @@
             showSaveIndicator('saved');
         }
 
-        // Event listeners for the buttons
+        // Event listeners
         document.addEventListener('DOMContentLoaded', () => {
             loadData();
             setupAutoSave();
             
+            // Existing button events
             document.getElementById('exportBtn').addEventListener('click', exportData);
             document.getElementById('printBtn').addEventListener('click', () => window.print());
             document.getElementById('clearBtn').addEventListener('click', clearData);
+            
+            // New share button event
+            document.getElementById('shareBtn').addEventListener('click', openShareModal);
+            
+            // Close modal when clicking backdrop
+            document.getElementById('shareModal').addEventListener('click', (e) => {
+                if (e.target === e.currentTarget) {
+                    closeShareModal();
+                }
+            });
+            
+            // Escape key to close modal
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && document.getElementById('shareModal').classList.contains('show')) {
+                    closeShareModal();
+                }
+            });
         });
     </script>
 </body>
